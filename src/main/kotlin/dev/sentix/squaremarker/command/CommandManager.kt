@@ -8,6 +8,10 @@ import cloud.commandframework.paper.PaperCommandManager
 import org.bukkit.command.CommandSender
 import dev.sentix.squaremarker.Config
 import dev.sentix.squaremarker.SquareMarker
+import dev.sentix.squaremarker.command.commands.ListMarkerCommand
+import dev.sentix.squaremarker.command.commands.RemoveMarkerCommand
+import dev.sentix.squaremarker.command.commands.SetMarkerCommand
+import dev.sentix.squaremarker.command.commands.ShowMarkerCommand
 import java.util.function.UnaryOperator
 
 
@@ -29,8 +33,13 @@ class CommandManager(
             this.registerAsynchronousCompletions();
         }
 
-        mutableListOf<SquaremarkerCommand>(
-            //TestCommand(plugin, this),
+        mutableListOf(
+
+            ListMarkerCommand(plugin, this),
+            RemoveMarkerCommand(plugin, this),
+            SetMarkerCommand(plugin, this),
+            ShowMarkerCommand(plugin, this)
+
         ).forEach(SquaremarkerCommand::register)
 
     }
@@ -41,8 +50,8 @@ class CommandManager(
 
     private fun rootBuilder(): Command.Builder<CommandSender> {
         return this.commandBuilder(
-            Config.COMMAND_LABEL!!,
-            "", "")
+            Config.COMMAND_LABEL,
+            "marker", "squaremapmarker", "smarker")
             .meta(CommandMeta.DESCRIPTION, String.format("SquareMarker command. '/%s help'", Config.COMMAND_LABEL))
     }
 

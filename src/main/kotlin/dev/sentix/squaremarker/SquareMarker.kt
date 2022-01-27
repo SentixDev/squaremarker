@@ -1,5 +1,6 @@
 package dev.sentix.squaremarker
 
+import dev.sentix.squaremarker.command.CommandManager
 import org.bukkit.configuration.Configuration
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
@@ -15,6 +16,8 @@ class SquareMarker : JavaPlugin() {
         main = this
 
         initConfiguration()
+
+        initCommandManager()
 
         IO.init()
     }
@@ -33,6 +36,17 @@ class SquareMarker : JavaPlugin() {
         saveConfig()
 
         configuration = config
+    }
+
+    private fun initCommandManager() {
+        try {
+            CommandManager(this)
+        } catch (e: Exception) {
+            println("Failed to initialize command manager!")
+            println(e)
+            this.isEnabled = false
+            return
+        }
     }
 
 }
