@@ -14,6 +14,8 @@ val minecraftVersion: String by project
 val cloudVersion: String by project
 val bstatsVersion: String by project
 val squaremapVersion: String by project
+val minimessageVersion: String by project
+val adventureVersion: String by project
 
 repositories {
     mavenCentral()
@@ -31,6 +33,10 @@ dependencies {
     implementation("cloud.commandframework", "cloud-kotlin-extensions", cloudVersion)
 
     implementation("org.bstats", "bstats-bukkit", bstatsVersion)
+
+    implementation("net.kyori", "adventure-text-minimessage", minimessageVersion)
+
+    implementation("net.kyori", "adventure-api", adventureVersion)
 
     compileOnly("xyz.jpenilla", "squaremap-api", squaremapVersion)
 }
