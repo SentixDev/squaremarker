@@ -2,6 +2,7 @@ package dev.sentix.squaremarker
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import dev.sentix.squaremarker.marker.Marker
 import java.io.File
 
 object IO {
