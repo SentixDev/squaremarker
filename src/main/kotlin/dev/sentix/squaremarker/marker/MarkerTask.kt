@@ -22,7 +22,7 @@ class MarkerTask(world: MapWorld, provider: SimpleLayerProvider) : BukkitRunnabl
         }
 
         provider.clearMarkers()
-        MarkerService.getMarkerList()?.forEach { marker ->
+        MarkerService.getMarkerList().forEach { marker ->
             if (Bukkit.getWorld(marker.world)?.uid == BukkitAdapter.bukkitWorld(world).uid) {
                 val iconKey: Key = if (marker.iconUrl != "") {
                     Key.of(marker.iconKey)

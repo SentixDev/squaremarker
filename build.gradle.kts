@@ -68,7 +68,8 @@ tasks {
 }
 
 bukkit {
-    load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.STARTUP
+    depend = listOf("squaremap")
+    load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD
     name = "squaremarker"
     prefix = "squaremarker"
     main = "dev.sentix.squaremarker.SquareMarker"

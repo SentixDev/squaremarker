@@ -35,7 +35,7 @@ object API {
     private fun registerIcons() {
         SquaremapProvider.get().iconRegistry()
             .register(markerIconKey, ImageIO.read(URL(Config.ICON_URL)))
-        for (marker in MarkerService.getMarkerList()!!) {
+        for (marker in MarkerService.getMarkerList()) {
             if (marker.iconUrl != "") {
                 SquaremapProvider.get().iconRegistry()
                     .register(Key.of("squaremarker_marker_icon_${marker.id}"), ImageIO.read(URL(marker.iconUrl)))

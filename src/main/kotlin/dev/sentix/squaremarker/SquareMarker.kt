@@ -4,7 +4,6 @@ import dev.sentix.squaremarker.command.CommandManager
 import dev.sentix.squaremarker.marker.API
 import org.bukkit.configuration.Configuration
 import org.bukkit.plugin.java.JavaPlugin
-import java.io.File
 
 class SquareMarker : JavaPlugin() {
 
@@ -21,6 +20,7 @@ class SquareMarker : JavaPlugin() {
         initCommandManager()
 
         IO.init()
+
         API.init()
     }
 

@@ -14,12 +14,12 @@ object IO {
     fun init() {
         val emptyMarkerList = emptyList<Marker>()
         if (!markerFile.exists()) {
-            markerFile.bufferedWriter().write(gsonPrettier.toJson(emptyMarkerList))
+            markerFile.bufferedWriter().use { it.write(gsonPrettier.toJson(emptyMarkerList)) }
         }
     }
 
     fun write(input: MutableList<Marker>) {
-        markerFile.bufferedWriter().write(gsonPrettier.toJson(input))
+        markerFile.bufferedWriter().use { it.write(gsonPrettier.toJson(input)) }
     }
 
     fun read(): String {
