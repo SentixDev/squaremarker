@@ -69,10 +69,10 @@ tasks {
 
 bukkit {
     load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.STARTUP
-    name = "SquareMarker"
-    prefix = "SquareMarker"
+    name = "squaremarker"
+    prefix = "squaremarker"
     main = "dev.sentix.squaremarker.SquareMarker"
     apiVersion = "1.18"
     authors = listOf("Sentix")
-    website = "github.com/SquareMarker"
+    website = "https://github.com/SentixDev/squaremarker"
 }
