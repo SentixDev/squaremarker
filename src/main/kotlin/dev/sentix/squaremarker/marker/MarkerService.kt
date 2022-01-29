@@ -1,7 +1,8 @@
-package dev.sentix.squaremarker
+package dev.sentix.squaremarker.marker
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import dev.sentix.squaremarker.IO
 
 object MarkerService {
 

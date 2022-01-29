@@ -1,4 +1,4 @@
-package dev.sentix.squaremarker
+package dev.sentix.squaremarker.marker
 
 data class Marker(
     val id: Int,
