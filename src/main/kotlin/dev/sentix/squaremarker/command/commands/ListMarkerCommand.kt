@@ -2,6 +2,7 @@ package dev.sentix.squaremarker.command.commands
 
 import cloud.commandframework.context.CommandContext
 import cloud.commandframework.minecraft.extras.MinecraftExtrasMetaKeys
+import dev.sentix.squaremarker.Components
 import dev.sentix.squaremarker.Lang
 import dev.sentix.squaremarker.SquareMarker
 import dev.sentix.squaremarker.command.CommandManager
@@ -17,7 +18,7 @@ class ListMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
     override fun register() {
         this.commandManager.registerSubcommand { builder ->
             builder.literal("list")
-                .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Lang.parse("List all markers."))
+                .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("List all markers."))
                 .permission("squaremarker.list")
                 .handler(this::execute)
         }
@@ -26,7 +27,7 @@ class ListMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
     private fun execute(context: CommandContext<CommandSender>) {
         val sender = context.sender
 
-        Lang.send(sender, "LIST")
+        Components.send(sender, "LIST")
 
     }
 }

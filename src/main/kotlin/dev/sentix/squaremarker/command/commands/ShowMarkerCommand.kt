@@ -3,6 +3,7 @@ package dev.sentix.squaremarker.command.commands
 import cloud.commandframework.arguments.standard.IntegerArgument
 import cloud.commandframework.context.CommandContext
 import cloud.commandframework.minecraft.extras.MinecraftExtrasMetaKeys
+import dev.sentix.squaremarker.Components
 import dev.sentix.squaremarker.Lang
 import dev.sentix.squaremarker.SquareMarker
 import dev.sentix.squaremarker.command.CommandManager
@@ -19,7 +20,7 @@ class ShowMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
         this.commandManager.registerSubcommand { builder ->
             builder.literal("show")
                 .argument(IntegerArgument.newBuilder("id"))
-                .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Lang.parse("Show a marker by id."))
+                .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("Show a marker by id."))
                 .permission("squaremarker.show")
                 .handler(this::execute)
         }
@@ -30,6 +31,6 @@ class ShowMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
 
         val id: Int = context.get("id")
 
-        Lang.send(sender, "ID: $id")
+        Components.send(sender, "ID: $id")
     }
 }

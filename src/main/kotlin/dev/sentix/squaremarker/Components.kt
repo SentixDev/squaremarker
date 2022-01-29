@@ -4,7 +4,7 @@ import net.kyori.adventure.audience.Audience
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 
-class Components {
+object Components {
 
     fun parse(input: String): Component {
         return MiniMessage.miniMessage().deserialize(input)

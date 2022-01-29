@@ -3,6 +3,7 @@ package dev.sentix.squaremarker.command.commands
 import cloud.commandframework.arguments.standard.StringArgument
 import cloud.commandframework.context.CommandContext
 import cloud.commandframework.minecraft.extras.MinecraftExtrasMetaKeys
+import dev.sentix.squaremarker.Components
 import dev.sentix.squaremarker.Lang
 import dev.sentix.squaremarker.SquareMarker
 import dev.sentix.squaremarker.command.CommandManager
@@ -19,7 +20,7 @@ class SetMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
         this.commandManager.registerSubcommand { builder ->
             builder.literal("set")
                 .argument(StringArgument.newBuilder<CommandSender>("input").greedy().asOptionalWithDefault(" "))
-                .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Lang.parse("Set a marker at your position."))
+                .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("Set a marker at your position."))
                 .permission("squaremarker.set")
                 .handler(this::execute)
         }
@@ -45,9 +46,9 @@ class SetMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
             url = "http${split[1]}"
         }
 
-        sender.sendMessage("ID: $id")
-        sender.sendMessage("CONTENT: $content")
-        sender.sendMessage("URL: $url")
+        Components.send(sender, "ID: $id")
+        Components.send(sender, "CONTENT: $content")
+        Components.send(sender, "URL: $url")
 
     }
 
