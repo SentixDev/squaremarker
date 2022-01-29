@@ -10,6 +10,6 @@ object Config {
 
     val ICON_URL = SquareMarker.configuration.getString("icon-url")!!
 
-    val ICON_SIZE = SquareMarker.configuration.getString("icon-size")!!
+    val ICON_SIZE = SquareMarker.configuration.getInt("icon-size")
 
 }
