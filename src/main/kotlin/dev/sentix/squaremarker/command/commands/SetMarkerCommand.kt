@@ -4,7 +4,6 @@ import cloud.commandframework.arguments.standard.StringArgument
 import cloud.commandframework.context.CommandContext
 import cloud.commandframework.minecraft.extras.MinecraftExtrasMetaKeys
 import dev.sentix.squaremarker.Components
-import dev.sentix.squaremarker.Lang
 import dev.sentix.squaremarker.SquareMarker
 import dev.sentix.squaremarker.command.CommandManager
 import dev.sentix.squaremarker.command.SquaremarkerCommand
