@@ -67,6 +67,17 @@ class HelpCommand(plugin: SquareMarker, commandManager: CommandManager) :
             sender,
             " <gray>× ${
                 Components.clickable(
+                    "<color:#8411FB>/squaremarker update <white><id></white> <white>[CONTENT]</white> <white>[ICON-URL]</white>",
+                    "<color:#8411FB>/squaremarker update",
+                    "suggest_command",
+                    "/squaremarker update "
+                )
+            }"
+        )
+        Components.send(
+            sender,
+            " <gray>× ${
+                Components.clickable(
                     "<color:#8411FB>/squaremarker remove <white><ID></white>",
                     "<color:#8411FB>/squaremarker remove",
                     "suggest_command",

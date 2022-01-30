@@ -7,6 +7,7 @@ import dev.sentix.squaremarker.Components
 import dev.sentix.squaremarker.SquareMarker
 import dev.sentix.squaremarker.command.CommandManager
 import dev.sentix.squaremarker.command.SquaremarkerCommand
+import dev.sentix.squaremarker.marker.MarkerService
 import org.bukkit.command.CommandSender
 
 class RemoveMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
@@ -30,6 +31,13 @@ class RemoveMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) 
 
         val id: Int = context.get("id")
 
-        Components.send(sender, "ID: $id")
+        if (MarkerService.markerExist(id)) {
+            MarkerService.removeMarker(id)
+            Components.sendPrefixed(sender, "<gray>Removed marker with ID <color:#8411FB>$id<gray>.</gray>")
+        } else {
+            Components.sendPrefixed(sender, "<gray>No marker with ID <color:#8411FB>$id <gray>found.</gray>")
+        }
+
     }
+
 }

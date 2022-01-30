@@ -47,7 +47,8 @@ class CommandManager(
             ListMarkerCommand(plugin, this),
             RemoveMarkerCommand(plugin, this),
             SetMarkerCommand(plugin, this),
-            ShowMarkerCommand(plugin, this)
+            ShowMarkerCommand(plugin, this),
+            UpdateMarkerCommand(plugin, this)
 
         ).forEach(SquaremarkerCommand::register)
 

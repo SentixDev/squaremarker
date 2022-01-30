@@ -1,5 +1,6 @@
 package dev.sentix.squaremarker.command.commands
 
+import cloud.commandframework.arguments.standard.IntegerArgument
 import cloud.commandframework.arguments.standard.StringArgument
 import cloud.commandframework.context.CommandContext
 import cloud.commandframework.minecraft.extras.MinecraftExtrasMetaKeys
@@ -13,11 +14,9 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import xyz.jpenilla.squaremap.api.Key
 import xyz.jpenilla.squaremap.api.SquaremapProvider
-import java.net.MalformedURLException
-import java.net.URL
-import javax.imageio.ImageIO
+import java.io.File
 
-class SetMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
+class UpdateMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
     SquaremarkerCommand(
         plugin,
         commandManager
@@ -25,9 +24,10 @@ class SetMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
 
     override fun register() {
         this.commandManager.registerSubcommand { builder ->
-            builder.literal("set")
+            builder.literal("update")
+                .argument(IntegerArgument.newBuilder<CommandSender>("id").build())
                 .argument(StringArgument.newBuilder<CommandSender>("input").greedy().asOptionalWithDefault(" "))
-                .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("Set a marker at your position."))
+                .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("Update a marker to your position."))
                 .permission("squaremarker.set")
                 .handler(this::execute)
         }
@@ -39,7 +39,7 @@ class SetMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
 
         if (sender is Player) {
 
-            val id: Number = (9..99999).random()
+            val id: Int = context.get("id")
 
             val iconKey = "squaremap_marker_$id"
 
@@ -58,7 +58,7 @@ class SetMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
             }
 
             val marker = Marker(
-                id.toInt(),
+                id,
                 content,
                 url,
                 iconKey,
@@ -68,20 +68,17 @@ class SetMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
                 sender.location.z
             )
 
-            if (!MarkerService.markerExist(id.toInt())) {
-                MarkerService.addMarker(marker)
-                Components.sendPrefixed(sender, "<gray>Created marker with ID <color:#8411FB>$id<gray>.</gray>")
+            if (MarkerService.markerExist(id)) {
 
-                try {
-                    SquaremapProvider.get().iconRegistry().register(
-                        Key.key(marker.iconKey), ImageIO.read(
-                            URL(marker.iconUrl)
-                        )
-                    )
-                } catch (ex: Exception,) {
-                    Components.sendPrefixed(sender, "<gray>Marker icon set to default.")
+                if (MarkerService.getMarker(id).iconUrl != "") {
+                    SquaremapProvider.get().iconRegistry().unregister(Key.key(marker.iconKey))
+                    File("${SquaremapProvider.get().webDir()}/images/icon/registered/${marker.iconKey}.png").delete()
                 }
+                MarkerService.updateMarker(marker)
+                Components.sendPrefixed(sender, "<gray>Updated existing marker with ID <color:#8411FB>$id<gray>.</gray>")
 
+            } else {
+                Components.sendPrefixed(sender, "<gray>No marker with ID <color:#8411FB>$id <gray>found.</gray>")
             }
 
         }
