@@ -2,6 +2,7 @@ package dev.sentix.squaremarker
 
 import dev.sentix.squaremarker.command.CommandManager
 import dev.sentix.squaremarker.marker.API
+import org.bstats.bukkit.Metrics
 import org.bukkit.configuration.Configuration
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -22,6 +23,9 @@ class SquareMarker : JavaPlugin() {
         IO.init()
 
         API.init()
+
+        /* https://bstats.org/plugin/bukkit/squaremarker/14117 */
+        Metrics(this, 14117)
     }
 
     override fun onDisable() {
