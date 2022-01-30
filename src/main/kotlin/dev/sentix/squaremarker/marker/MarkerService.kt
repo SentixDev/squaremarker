@@ -15,6 +15,15 @@ object MarkerService {
         return getMarkerList().filter { it.id == id }[0]
     }
 
+    fun markerExist(id: Int): Boolean {
+        return try {
+            getMarker(id)
+            true
+        } catch (_: IndexOutOfBoundsException) {
+            false
+        }
+    }
+
     fun addMarker(marker: Marker) {
         val markerList = getMarkerList()
         markerList.add(marker)
