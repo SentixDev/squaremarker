@@ -12,4 +12,8 @@ object Config {
 
     val ICON_SIZE = SquareMarker.configuration.getInt("icon-size")
 
+    val SHOW_CONTROLS = SquareMarker.configuration.getBoolean("show-controls")
+
+    val DEFAULT_HIDDEN = SquareMarker.configuration.getBoolean("default-hidden")
+
 }

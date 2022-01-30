@@ -37,6 +37,8 @@ class SquareMarker : JavaPlugin() {
         config.addDefault("layer-name", "Marker")
         config.addDefault("icon-url", "https://cdn.upload.systems/uploads/1zRKxN3t.png")
         config.addDefault("icon-size", 16)
+        config.addDefault("show-controls", true)
+        config.addDefault("default-hidden", false)
 
         config.options().copyDefaults(true)
         saveConfig()
