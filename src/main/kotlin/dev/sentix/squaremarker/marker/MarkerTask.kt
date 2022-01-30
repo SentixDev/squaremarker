@@ -37,9 +37,7 @@ class MarkerTask(world: MapWorld, provider: SimpleLayerProvider) : BukkitRunnabl
                         Bukkit.getWorld(marker.world),
                         marker.posX,
                         marker.posY,
-                        marker.posY,
-                        0.0F,
-                        0.0F
+                        marker.posZ
                     )
                 )
             }
@@ -51,7 +49,7 @@ class MarkerTask(world: MapWorld, provider: SimpleLayerProvider) : BukkitRunnabl
     private fun handle(id: Int, name: String, iconKey: Key, location: Location) {
         val worldName = location.world.name
         val icon: Icon = Marker.icon(BukkitAdapter.point(location), iconKey, Config.ICON_SIZE)
-        if (name.isNotEmpty()) {
+        if (name.isNotBlank()) {
             icon.markerOptions(
                 MarkerOptions.builder()
                     .hoverTooltip(
