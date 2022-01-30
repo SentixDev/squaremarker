@@ -24,13 +24,13 @@ object API {
 
         SquaremapProvider.get().mapWorlds().forEach { mapWorld ->
             val provider: SimpleLayerProvider = SimpleLayerProvider.builder(Config.LAYER_NAME)
-                .showControls(true)
-                .defaultHidden(false)
+                .showControls(Config.SHOW_CONTROLS)
+                .defaultHidden(Config.DEFAULT_HIDDEN)
                 .build()
             mapWorld.layerRegistry()
                 .register(Key.of("squaremarker_" + BukkitAdapter.bukkitWorld(mapWorld).uid + "_marker"), provider)
             val task = MarkerTask(mapWorld, provider)
-            SquareMarker.main.let { task.runTaskTimerAsynchronously(it, 0, 20L * 2) }
+            SquareMarker.main.let { task.runTaskTimerAsynchronously(it, 0, 20L * 5) }
             providerMap[BukkitAdapter.bukkitWorld(mapWorld).uid.toString()] = task
         }
 
@@ -40,7 +40,6 @@ object API {
         SquaremapProvider.get().iconRegistry()
             .register(markerIconKey, ImageIO.read(URL(Config.ICON_URL)))
         for (marker in MarkerService.getMarkerList()) {
-            println(marker.iconUrl)
             if (marker.iconUrl.isNotBlank()) {
                 try {
                     SquaremapProvider.get().iconRegistry()

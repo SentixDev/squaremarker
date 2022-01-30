@@ -13,7 +13,6 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import xyz.jpenilla.squaremap.api.Key
 import xyz.jpenilla.squaremap.api.SquaremapProvider
-import java.net.MalformedURLException
 import java.net.URL
 import javax.imageio.ImageIO
 
@@ -41,7 +40,7 @@ class SetMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
 
             val id: Number = (9..99999).random()
 
-            val iconKey = "squaremap_marker_$id"
+            val iconKey = "squaremarker_marker_icon_$id"
 
             val input: String = context.get("input")
 
@@ -59,8 +58,8 @@ class SetMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
 
             val marker = Marker(
                 id.toInt(),
-                content,
-                url,
+                content.trim(),
+                url.trim(),
                 iconKey,
                 sender.location.world.name,
                 sender.location.x,

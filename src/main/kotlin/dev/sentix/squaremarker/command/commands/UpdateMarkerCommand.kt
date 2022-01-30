@@ -15,6 +15,8 @@ import org.bukkit.entity.Player
 import xyz.jpenilla.squaremap.api.Key
 import xyz.jpenilla.squaremap.api.SquaremapProvider
 import java.io.File
+import java.net.URL
+import javax.imageio.ImageIO
 
 class UpdateMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
     SquaremarkerCommand(
@@ -41,7 +43,7 @@ class UpdateMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) 
 
             val id: Int = context.get("id")
 
-            val iconKey = "squaremap_marker_$id"
+            val iconKey = "squaremarker_marker_icon_$id"
 
             val input: String = context.get("input")
 
@@ -59,8 +61,8 @@ class UpdateMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) 
 
             val marker = Marker(
                 id,
-                content,
-                url,
+                content.trim(),
+                url.trim(),
                 iconKey,
                 sender.location.world.name,
                 sender.location.x,
@@ -70,10 +72,21 @@ class UpdateMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) 
 
             if (MarkerService.markerExist(id)) {
 
-                if (MarkerService.getMarker(id).iconUrl != "") {
+                if (MarkerService.getMarker(id).iconUrl.isNotBlank()) {
                     SquaremapProvider.get().iconRegistry().unregister(Key.key(marker.iconKey))
                     File("${SquaremapProvider.get().webDir()}/images/icon/registered/${marker.iconKey}.png").delete()
                 }
+
+                try {
+                    SquaremapProvider.get().iconRegistry().register(
+                        Key.key(marker.iconKey), ImageIO.read(
+                            URL(marker.iconUrl)
+                        )
+                    )
+                } catch (ex: Exception,) {
+                    Components.sendPrefixed(sender, "<gray>Marker icon set to default.")
+                }
+
                 MarkerService.updateMarker(marker)
                 Components.sendPrefixed(sender, "<gray>Updated existing marker with ID <color:#8411FB>$id<gray>.</gray>")
 
