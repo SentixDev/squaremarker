@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "1.6.10"
-    id("io.papermc.paperweight.userdev") version "1.3.3"
-    id("com.github.johnrengelman.shadow") version "7.0.0"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.papermc.paperweight.userdev") version "1.3.5"
     id("net.minecrell.plugin-yml.bukkit") version "0.5.1"
     application
 }
@@ -14,7 +14,6 @@ val minecraftVersion: String by project
 val cloudVersion: String by project
 val bstatsVersion: String by project
 val squaremapVersion: String by project
-val minimessageVersion: String by project
 val adventureVersion: String by project
 
 repositories {
@@ -34,9 +33,7 @@ dependencies {
 
     implementation("org.bstats", "bstats-bukkit", bstatsVersion)
 
-    implementation("net.kyori", "adventure-text-minimessage", minimessageVersion)
-
-    implementation("net.kyori", "adventure-api", adventureVersion)
+    compileOnly("net.kyori", "adventure-api", adventureVersion)
 
     compileOnly("xyz.jpenilla", "squaremap-api", squaremapVersion)
 }
@@ -45,18 +42,22 @@ application {
     mainClass.set("dev.sentix.squaremarker.SquareMarkerKt")
 }
 
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
-}
-
 tasks {
     assemble {
         dependsOn(reobfJar)
     }
 
+    java {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    }
+
     compileJava {
         options.encoding = Charsets.UTF_8.name()
         options.release.set(17)
+    }
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = "17"
     }
 
     shadowJar {
