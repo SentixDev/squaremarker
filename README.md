@@ -15,10 +15,10 @@ Downloads are available via [github releases](https://github.com/SentixDev/squar
 - ### COMMAND | DESCRIPTION | PERMISSION
 - /squaremarker help | Shows a list of existing commands | squaremarker.help
 - /squaremarker list | Shows a list with all existing markers | squaremarker.list
-- /squaremarker show | Shows details to a specific marker | squaremarker.show
-- /squaremarker set | Set a marker at your current location | squaremarker.set
-- /squaremarker update | Update a marker at to current location | squaremarker.update
-- /squaremarker remove | Remove a marker with ID | squaremarker.remove
+- /squaremarker show <id> | Shows details to a specific marker | squaremarker.show
+- /squaremarker set [content] [icon-url] | Set a marker at your current location | squaremarker.set
+- /squaremarker update <id> [content] [icon-url] | Update a marker at to current location | squaremarker.update
+- /squaremarker remove <id> | Remove a marker with ID | squaremarker.remove
 
 ## Configuration:
 - "command-label": (define the main command label)

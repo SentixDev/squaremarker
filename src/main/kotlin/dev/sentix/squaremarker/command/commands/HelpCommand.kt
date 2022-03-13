@@ -56,7 +56,7 @@ class HelpCommand(plugin: SquareMarker, commandManager: CommandManager) :
             sender,
             " <gray>× ${
                 Components.clickable(
-                    "<color:#8411FB>/squaremarker set <white>[CONTENT]</white> <white>[ICON-URL]</white>",
+                    "<color:#8411FB>/squaremarker set <white>[content]</white> <white>[icon-url]</white>",
                     "<color:#8411FB>/squaremarker set",
                     "suggest_command",
                     "/squaremarker set "
@@ -67,7 +67,7 @@ class HelpCommand(plugin: SquareMarker, commandManager: CommandManager) :
             sender,
             " <gray>× ${
                 Components.clickable(
-                    "<color:#8411FB>/squaremarker update <white><id></white> <white>[CONTENT]</white> <white>[ICON-URL]</white>",
+                    "<color:#8411FB>/squaremarker update <white><id></white> <white>[content]</white> <white>[icon-url]</white>",
                     "<color:#8411FB>/squaremarker update",
                     "suggest_command",
                     "/squaremarker update "
@@ -78,7 +78,7 @@ class HelpCommand(plugin: SquareMarker, commandManager: CommandManager) :
             sender,
             " <gray>× ${
                 Components.clickable(
-                    "<color:#8411FB>/squaremarker remove <white><ID></white>",
+                    "<color:#8411FB>/squaremarker remove <white><id></white>",
                     "<color:#8411FB>/squaremarker remove",
                     "suggest_command",
                     "/squaremarker remove "
@@ -89,7 +89,7 @@ class HelpCommand(plugin: SquareMarker, commandManager: CommandManager) :
             sender,
             " <gray>× ${
                 Components.clickable(
-                    "<color:#8411FB>/squaremarker show <white><ID></white>",
+                    "<color:#8411FB>/squaremarker show <white><id></white>",
                     "<color:#8411FB>/squaremarker show",
                     "suggest_command",
                     "/squaremarker show "
