@@ -1,7 +1,7 @@
 # squaremarker
 A simple marker extension for squaremap (https://github.com/jpenilla/squaremap)
 <br>
-This plugin is an extension and only works in combination with Pl3xMap.
+This plugin is an extension and only works in combination with squaremap.
 <br>
 It offers the possibility to easily create markers yourself, which are then displayed on the map.<br>
 This project is still under development and will be improved and expanded in the future.<br>
