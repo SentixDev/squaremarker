@@ -77,7 +77,7 @@ class SetMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
                             URL(marker.iconUrl)
                         )
                     )
-                } catch (ex: Exception,) {
+                } catch (ex: Exception) {
                     Components.sendPrefixed(sender, "<gray>Marker icon set to default.")
                 }
 

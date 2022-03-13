@@ -44,7 +44,7 @@ class ShowMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
     private fun sendMarkerOverview(sender: CommandSender, marker: Marker) {
         val gradient = Components.gradient("<b>Marker</b>")
         val div =
-            "<dark_gray>» <dark_gray><st>-------------<r> <gray>× $gradient <gray>× <dark_gray><st>-------------<r> <dark_gray>«"
+            "<dark_gray>» <dark_gray><st>-------------<reset> <gray>× $gradient <gray>× <dark_gray><st>-------------<reset> <dark_gray>«"
 
         Components.send(sender, "")
         Components.send(

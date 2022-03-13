@@ -33,7 +33,7 @@ class HelpCommand(plugin: SquareMarker, commandManager: CommandManager) :
     private fun sendHelpMessage(sender: CommandSender) {
         val gradient = Components.gradient("<b>Marker</b>")
         val div =
-            "<dark_gray>» <dark_gray><st>-------------<r> <gray>× $gradient <gray>× <dark_gray><st>-------------<r> <dark_gray>«"
+            "<dark_gray>» <dark_gray><st>-------------<reset> <gray>× $gradient <gray>× <dark_gray><st>-------------<reset> <dark_gray>«"
 
         Components.send(sender, "")
         Components.send(sender, div)

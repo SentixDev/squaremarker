@@ -45,7 +45,7 @@ class ListMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
         Components.send(sender, "")
         Components.send(
             sender,
-            "<dark_gray>» <dark_gray><st>-------------<r> <gray>× $gradient <gray>× <dark_gray><st>-------------<r> <dark_gray>«"
+            "<dark_gray>» <dark_gray><st>-------------<reset> <gray>× $gradient <gray>× <dark_gray><st>-------------<reset> <dark_gray>«"
         )
         Components.send(sender, "")
 
@@ -67,7 +67,7 @@ class ListMarkerCommand(plugin: SquareMarker, commandManager: CommandManager) :
         Components.send(sender, "")
         Components.send(
             sender,
-            "<dark_gray>» <dark_gray><st>-------------<r> <gray>× $gradient <gray>× <dark_gray><st>-------------<r> <dark_gray>«"
+            "<dark_gray>» <dark_gray><st>-------------<reset> <gray>× $gradient <gray>× <dark_gray><st>-------------<reset> <dark_gray>«"
         )
         Components.send(sender, "")
     }
