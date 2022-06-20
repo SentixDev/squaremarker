@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.7.0"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.papermc.paperweight.userdev") version "1.3.5"
     id("net.minecrell.plugin-yml.bukkit") version "0.5.1"
@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "dev.sentix"
-version = "1.0.0"
+version = "1.0.1"
 description = "Experimental Pl3xMap-Marker recode using Paperweight and the Cloud-Commandframework"
 
 val minecraftVersion: String by project
@@ -74,7 +74,7 @@ bukkit {
     name = "squaremarker"
     prefix = "squaremarker"
     main = "dev.sentix.squaremarker.SquareMarker"
-    apiVersion = "1.18"
+    apiVersion = "1.19"
     authors = listOf("Sentix")
     website = "https://github.com/SentixDev/squaremarker"
 }

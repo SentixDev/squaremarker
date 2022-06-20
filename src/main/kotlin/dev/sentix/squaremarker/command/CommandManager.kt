@@ -30,12 +30,12 @@ class CommandManager(
 ) {
 
     init {
-        if (this.queryCapability(CloudBukkitCapabilities.NATIVE_BRIGADIER)) {
+        if (this.hasCapability(CloudBukkitCapabilities.NATIVE_BRIGADIER)) {
             this.registerBrigadier()
             brigadierManager()?.setNativeNumberSuggestions(false)
         }
 
-        if (this.queryCapability(CloudBukkitCapabilities.ASYNCHRONOUS_COMPLETION)) {
+        if (this.hasCapability(CloudBukkitCapabilities.ASYNCHRONOUS_COMPLETION)) {
             this.registerAsynchronousCompletions();
         }
 
