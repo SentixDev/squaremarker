@@ -17,7 +17,7 @@ Downloads are available via [github releases](https://github.com/SentixDev/squar
 - /squaremarker list | Shows a list with all existing markers | squaremarker.list
 - /squaremarker show \<id\> | Shows details to a specific marker | squaremarker.show
 - /squaremarker set [content] [icon-url] | Set a marker at your current location | squaremarker.set
-- /squaremarker update \<id\> [content] [icon-url] | Update a marker at to current location | squaremarker.update
+- /squaremarker update \<id\> [content] [icon-url] | Update a marker to your current location | squaremarker.update
 - /squaremarker remove \<id\> | Remove a marker with ID | squaremarker.remove
 
 ## Configuration:
