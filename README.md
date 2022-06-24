@@ -9,7 +9,7 @@ This project is still under development and will be improved and expanded in the
 Feel free to report any bugs you find via [GitGub Issues](https://github.com/SentixDev/squaremarker/issues).
 
 # Download
-Downloads are available via [GitGub Releases](https://github.com/SentixDev/squaremarker/releases).
+Downloads are available via [GitHub Releases](https://github.com/SentixDev/squaremarker/releases).
 
 # Usage
 
