@@ -18,7 +18,7 @@ import dev.sentix.squaremarker.command.commands.UpdateMarkerCommand
 
 class Commands(
     private val squareMarker: SquareMarker,
-    private val commandManager: CommandManager<Commander>
+    val commandManager: CommandManager<Commander>
 ) {
     init {
         registerExceptionHandlers()
