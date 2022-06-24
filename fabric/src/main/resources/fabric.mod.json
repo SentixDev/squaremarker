@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "squaremarker",
+  "version": "${version}",
+  "name": "squaremarker",
+  "description": "Marker addon for squaremap",
+  "authors": [
+    "Sentix"
+  ],
+  "contact": {
+    "homepage": "https://github.com/SentixDev/squaremarker",
+    "sources": "https://github.com/SentixDev/squaremarker"
+  },
+  "license": "Unknown (All Rights Reserved)",
+  "icon": "assets/squaremarker/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.sentix.squaremarker.fabric.SquareMarkerInitializer"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17",
+    "squaremap": "*"
+  }
+}
