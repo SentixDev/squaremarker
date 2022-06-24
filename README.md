@@ -16,7 +16,7 @@ Downloads are available via [GitGub Releases](https://github.com/SentixDev/squar
 ## Commands
 | Command                                          | Description                              | Permission            |
 |--------------------------------------------------|------------------------------------------|-----------------------|
-| `/squaremarker help`                             | Shows a list of existing commands        | `squaremarker.help`   |
+| `/squaremarker help [query]`                     | Query help for squaremarker commands     | `squaremarker.help`   |
 | `/squaremarker list`                             | Shows a list with all existing markers   | `squaremarker.list`   |
 | `/squaremarker show <id>`                        | Shows details to a specific marker       | `squaremarker.show`   |
 | `/squaremarker set [content] [icon-url]`         | Set a marker at your current location    | `squaremarker.set`    |
