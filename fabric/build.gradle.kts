@@ -38,6 +38,7 @@ tasks {
     }
     remapJar {
         inputFile.set(shadowJar.flatMap { it.archiveFile })
+        archiveFileName.set("${rootProject.name}-fabric-mc$minecraftVersion-${project.version}.jar")
     }
     processResources {
         inputs.property("version", project.version)
