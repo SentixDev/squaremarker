@@ -1,5 +1,6 @@
 plugins {
     id("com.github.johnrengelman.shadow")
+    id("squaremarker.platform")
     id("net.minecrell.plugin-yml.bukkit") version "0.5.2"
 }
 
@@ -17,10 +18,6 @@ dependencies {
 }
 
 tasks {
-    assemble {
-        dependsOn(shadowJar)
-    }
-
     java {
         toolchain.languageVersion.set(JavaLanguageVersion.of(17))
     }
@@ -34,7 +31,12 @@ tasks {
         kotlinOptions.jvmTarget = "17"
     }
 
+    jar {
+        archiveClassifier.set("not-shadowed")
+    }
+
     shadowJar {
+        archiveClassifier.set(null as String?)
         listOf(
             "cloud.commandframework",
         ).forEach { relocate(it, "${rootProject.group}.lib.$it") }
@@ -42,6 +44,10 @@ tasks {
             exclude(dependency("org.jetbrains:annotations"))
         }
     }
+}
+
+squareMarker {
+    productionJar.set(tasks.shadowJar.flatMap { it.archiveFile })
 }
 
 bukkit {

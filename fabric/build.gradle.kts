@@ -1,5 +1,6 @@
 plugins {
     id("fabric-loom")
+    id("squaremarker.platform")
     id("com.github.johnrengelman.shadow")
 }
 
@@ -45,4 +46,8 @@ tasks {
             expand("version" to project.version)
         }
     }
+}
+
+squareMarker {
+    productionJar.set(tasks.remapJar.flatMap { it.archiveFile })
 }
