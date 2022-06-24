@@ -6,7 +6,7 @@ This plugin is an extension and only works in combination with squaremap.
 <br>
 It offers the possibility to easily create markers yourself, which are then displayed on the map.<br>
 This project is still under development and will be improved and expanded in the future.<br>
-Feel free to report any bugs you find via [GitGub Issues](https://github.com/SentixDev/squaremarker/issues).
+Feel free to report any bugs you find via [GitHub Issues](https://github.com/SentixDev/squaremarker/issues).
 
 # Download
 Downloads are available via [GitHub Releases](https://github.com/SentixDev/squaremarker/releases).
