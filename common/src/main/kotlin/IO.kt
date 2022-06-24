@@ -3,6 +3,7 @@ package dev.sentix.squaremarker
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dev.sentix.squaremarker.marker.Marker
+import xyz.jpenilla.squaremap.api.WorldIdentifier
 import kotlin.io.path.bufferedReader
 import kotlin.io.path.bufferedWriter
 import kotlin.io.path.createDirectories
@@ -10,7 +11,13 @@ import kotlin.io.path.exists
 
 object IO {
 
-    private val gsonPrettier: Gson = GsonBuilder().setPrettyPrinting().create()
+    val gson: Gson = GsonBuilder()
+        .registerTypeAdapter(WorldIdentifier::class.java, SquareMarker.instance.worldIdentifierSerializer)
+        .create()
+
+    private val gsonPrettier: Gson = gson.newBuilder()
+        .setPrettyPrinting()
+        .create()
 
     private val markerFile = SquareMarker.instance.markerFile
 

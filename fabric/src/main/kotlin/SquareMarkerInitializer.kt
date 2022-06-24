@@ -26,7 +26,8 @@ class SquareMarkerInitializer : ModInitializer {
     private val squareMarker: SquareMarker = SquareMarker(
         createCommandManager(),
         FabricLoader.getInstance().configDir.resolve("${modContainer.metadata.id}.yml"),
-        FabricLoader.getInstance().gameDir.resolve(modContainer.metadata.id)
+        FabricLoader.getInstance().gameDir.resolve(modContainer.metadata.id),
+        FabricWorldIdentifierSerializer
     )
 
     override fun onInitialize() {

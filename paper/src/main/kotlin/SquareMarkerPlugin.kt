@@ -22,7 +22,8 @@ class SquareMarkerPlugin : JavaPlugin(), Listener {
         squareMarker = SquareMarker(
             createCommandManager(),
             dataFolder.toPath().resolve("config.yml"),
-            dataFolder.toPath()
+            dataFolder.toPath(),
+            PaperWorldIdentifierSerializer(server)
         )
 
         server.pluginManager.registerEvents(this, this)
