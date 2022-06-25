@@ -5,6 +5,7 @@ import org.spongepowered.configurate.objectmapping.ConfigSerializable
 @ConfigSerializable
 class Configuration {
     val commandLabel = "squaremarker"
+    val commandAliases = mutableListOf("marker", "squaremapmarker", "smarker")
     val layerName = "Marker"
     val iconUrl = "https://cdn.upload.systems/uploads/1zRKxN3t.png"
     val iconSize = 16

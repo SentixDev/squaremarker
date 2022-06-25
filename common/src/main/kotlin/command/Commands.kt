@@ -53,10 +53,7 @@ class Commands(
         commandManager.command(builderModifier(rootBuilder()))
     }
 
-    private fun rootBuilder(): Command.Builder<Commander> {
-        return commandManager.commandBuilder(
-            squareMarker.config.commandLabel,
-            "marker", "squaremapmarker", "smarker"
-        ).meta(CommandMeta.DESCRIPTION, "Squaremarker command. '/${squareMarker.config.commandLabel} help'")
-    }
+    private fun rootBuilder(): Command.Builder<Commander> = commandManager
+        .commandBuilder(squareMarker.config.commandLabel, *squareMarker.config.commandAliases.toTypedArray())
+        .meta(CommandMeta.DESCRIPTION, "Squaremarker command. '/${squareMarker.config.commandLabel} help'")
 }

@@ -28,6 +28,12 @@ Downloads are available via [GitHub Releases](https://github.com/SentixDev/squar
 # Define the main command label
 command-label: squaremarker
 
+# Define the main command aliases
+command-aliases:
+  - marker
+  - squaremapmarker
+  - smarker
+
 # Define the name of the layer
 layer-name: Marker
 
