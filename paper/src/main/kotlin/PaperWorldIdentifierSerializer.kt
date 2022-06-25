@@ -24,7 +24,7 @@ class PaperWorldIdentifierSerializer(private val server: Server) :
     }
 
     override fun deserialize(json: JsonElement?, typeOfT: Type, context: JsonDeserializationContext): WorldIdentifier? {
-        if (json == null) return null
+        if (json == null || json is JsonNull) return null
         val tryDeserializeKey = NamespacedKey.fromString(json.asString)
         if (tryDeserializeKey != null) {
             val world = server.getWorld(tryDeserializeKey)

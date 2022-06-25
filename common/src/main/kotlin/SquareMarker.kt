@@ -13,7 +13,7 @@ class SquareMarker(
     commandManager: CommandManager<Commander>,
     private val configFile: Path,
     dataDir: Path,
-    val worldIdentifierSerializer: Any
+    val worldIdentifierSerializer: Any = WorldIdentifierSerializer
 ) {
     companion object {
         val logger: ComponentLogger = ComponentLogger.logger(SquareMarker::class.java)
