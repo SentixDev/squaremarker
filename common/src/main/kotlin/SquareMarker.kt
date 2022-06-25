@@ -27,7 +27,9 @@ class SquareMarker(
         instance = this
 
         Commands(this, commandManager).registerCommands()
+    }
 
+    fun init() {
         IO.init()
 
         API.init()

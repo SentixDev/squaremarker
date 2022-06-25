@@ -30,6 +30,8 @@ class SquareMarkerInitializer : ModInitializer {
     )
 
     override fun onInitialize() {
+        // Ensure we initialize after squaremap regardless of load order (future squaremap versions should provide a better mechanism)
+        ServerLifecycleEvents.SERVER_STARTING.register { squareMarker.init() }
         ServerLifecycleEvents.SERVER_STOPPED.register { squareMarker.shutdown() }
 
         // Use custom late phase as workaround for squaremap <1.1.7
