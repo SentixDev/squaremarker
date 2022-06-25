@@ -2,7 +2,7 @@ package dev.sentix.squaremarker.command
 
 import cloud.commandframework.Command
 import cloud.commandframework.CommandManager
-import cloud.commandframework.exceptions.NoPermissionException
+import cloud.commandframework.exceptions.InvalidCommandSenderException
 import cloud.commandframework.meta.CommandMeta
 import cloud.commandframework.minecraft.extras.AudienceProvider
 import cloud.commandframework.minecraft.extras.MinecraftExceptionHandler
@@ -15,6 +15,8 @@ import dev.sentix.squaremarker.command.commands.RemoveMarkerCommand
 import dev.sentix.squaremarker.command.commands.SetMarkerCommand
 import dev.sentix.squaremarker.command.commands.ShowMarkerCommand
 import dev.sentix.squaremarker.command.commands.UpdateMarkerCommand
+import net.kyori.adventure.text.Component.text
+import net.kyori.adventure.text.format.NamedTextColor
 
 class Commands(
     private val squareMarker: SquareMarker,
@@ -38,15 +40,24 @@ class Commands(
     private fun registerExceptionHandlers() {
         MinecraftExceptionHandler<Commander>()
             .withArgumentParsingHandler()
-            .withInvalidSenderHandler()
             .withInvalidSyntaxHandler()
             .withCommandExecutionHandler()
+            .withHandler(MinecraftExceptionHandler.ExceptionType.INVALID_SENDER) { _, ex ->
+                ex as InvalidCommandSenderException
+                val requiredTypeDisplayName = when (ex.requiredSender) {
+                    PlayerCommander::class.java -> "Players"
+                    else -> ex.requiredSender.simpleName
+                }
+                text()
+                    .content("This command can only be executed by ")
+                    .color(NamedTextColor.RED)
+                    .append(text(requiredTypeDisplayName, NamedTextColor.GRAY))
+                    .append(text('!'))
+                    .build()
+            }
+            .withHandler(MinecraftExceptionHandler.ExceptionType.NO_PERMISSION) { _, _ -> Components.parse(Lang.NO_PERMISSION) }
             .withDecorator { Components.parse(Lang.HELP).append(it) }
             .apply(commandManager, AudienceProvider.nativeAudience())
-
-        commandManager.registerExceptionHandler(NoPermissionException::class.java) { sender, _ ->
-            Components.send(sender, Lang.NO_PERMISSION)
-        }
     }
 
     fun registerSubcommand(builderModifier: (Command.Builder<Commander>) -> Command.Builder<Commander>) {

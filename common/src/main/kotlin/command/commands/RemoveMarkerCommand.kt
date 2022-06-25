@@ -17,12 +17,12 @@ class RemoveMarkerCommand(plugin: SquareMarker, commands: Commands) :
     ) {
 
     override fun register() {
-        this.commands.registerSubcommand { builder ->
+        commands.registerSubcommand { builder ->
             builder.literal("remove")
                 .argument(IntegerArgument.newBuilder("id"))
                 .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("Remove a marker by id."))
                 .permission("squaremarker.remove")
-                .handler(this::execute)
+                .handler(::execute)
         }
     }
 

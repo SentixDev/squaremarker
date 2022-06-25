@@ -18,11 +18,11 @@ class ListMarkerCommand(plugin: SquareMarker, commands: Commands) :
     ) {
 
     override fun register() {
-        this.commands.registerSubcommand { builder ->
+        commands.registerSubcommand { builder ->
             builder.literal("list")
                 .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("List all markers."))
                 .permission("squaremarker.list")
-                .handler(this::execute)
+                .handler(::execute)
         }
     }
 
