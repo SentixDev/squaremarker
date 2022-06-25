@@ -26,7 +26,7 @@ class HelpCommand(plugin: SquareMarker, commands: Commands) :
         val helpQueryArgument = StringArgument.newBuilder<Commander>("query")
             .greedy()
             .asOptional()
-            .withSuggestionsProvider { context: CommandContext<Commander>, _: String ->
+            .withSuggestionsProvider { context, _ ->
                 val indexHelpTopic = commands.commandManager.createCommandHelpHandler()
                     .queryHelp(context.sender, "") as CommandHelpHandler.IndexHelpTopic<Commander>
                 indexHelpTopic.entries.map { it.syntaxString }.toList()
@@ -48,7 +48,7 @@ class HelpCommand(plugin: SquareMarker, commands: Commands) :
 
     private fun createHelp(): MinecraftHelp<Commander> {
         val help = MinecraftHelp(
-            "/${squareMarker.config.commandLabel}",
+            "/${squareMarker.config.commandLabel} help",
             AudienceProvider.nativeAudience(),
             commands.commandManager
         )
