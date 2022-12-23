@@ -20,7 +20,7 @@ class ShowMarkerCommand(plugin: SquareMarker, commands: Commands) :
     override fun register() {
         commands.registerSubcommand { builder ->
             builder.literal("show")
-                .argument(IntegerArgument.newBuilder("id"))
+                .argument(IntegerArgument.builder("id"))
                 .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("Show a marker by id."))
                 .permission("squaremarker.show")
                 .handler(::execute)

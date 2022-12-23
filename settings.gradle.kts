@@ -4,6 +4,8 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         maven("https://maven.fabricmc.net/")
+        maven("https://maven.quiltmc.org/repository/release/")
+        maven("https://repo.jpenilla.xyz/snapshots/")
     }
 }
 
@@ -15,10 +17,11 @@ dependencyResolutionManagement {
             mavenContent { snapshotsOnly() }
         }
     }
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 }
 
 plugins {
-    id("fabric-loom") version "0.12-SNAPSHOT"
+    id("quiet-fabric-loom") version "1.0-SNAPSHOT"
 }
 
 include("common")

@@ -26,7 +26,7 @@ class SetMarkerCommand(plugin: SquareMarker, commands: Commands) :
     override fun register() {
         commands.registerSubcommand { builder ->
             builder.literal("set")
-                .argument(StringArgument.newBuilder<Commander>("input").greedy().asOptionalWithDefault(" "))
+                .argument(StringArgument.builder<Commander>("input").greedy().asOptionalWithDefault(" "))
                 .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("Set a marker at your position."))
                 .permission("squaremarker.set")
                 .senderType(PlayerCommander::class.java)

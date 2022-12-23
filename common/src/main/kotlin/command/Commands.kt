@@ -3,6 +3,7 @@ package dev.sentix.squaremarker.command
 import cloud.commandframework.Command
 import cloud.commandframework.CommandManager
 import cloud.commandframework.exceptions.InvalidCommandSenderException
+import cloud.commandframework.execution.FilteringCommandSuggestionProcessor
 import cloud.commandframework.meta.CommandMeta
 import cloud.commandframework.minecraft.extras.AudienceProvider
 import cloud.commandframework.minecraft.extras.MinecraftExceptionHandler
@@ -24,6 +25,9 @@ class Commands(
 ) {
     init {
         registerExceptionHandlers()
+        commandManager.commandSuggestionProcessor(FilteringCommandSuggestionProcessor(
+            FilteringCommandSuggestionProcessor.Filter.contains<Commander>(true).andTrimBeforeLastSpace()
+        ))
     }
 
     fun registerCommands() {

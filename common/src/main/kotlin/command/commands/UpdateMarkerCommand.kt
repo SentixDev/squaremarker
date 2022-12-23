@@ -27,8 +27,8 @@ class UpdateMarkerCommand(plugin: SquareMarker, commands: Commands) :
     override fun register() {
         commands.registerSubcommand { builder ->
             builder.literal("update")
-                .argument(IntegerArgument.newBuilder<Commander>("id").build())
-                .argument(StringArgument.newBuilder<Commander>("input").greedy().asOptionalWithDefault(" "))
+                .argument(IntegerArgument.builder<Commander>("id").build())
+                .argument(StringArgument.builder<Commander>("input").greedy().asOptionalWithDefault(" "))
                 .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("Update a marker to your position."))
                 .permission("squaremarker.set")
                 .senderType(PlayerCommander::class.java)

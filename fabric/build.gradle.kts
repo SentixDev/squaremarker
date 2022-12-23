@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom")
+    id("quiet-fabric-loom")
     id("squaremarker.platform")
     id("com.github.johnrengelman.shadow")
 }

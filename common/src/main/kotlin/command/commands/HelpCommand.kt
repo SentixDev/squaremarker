@@ -23,7 +23,7 @@ class HelpCommand(plugin: SquareMarker, commands: Commands) :
     private val help = createHelp()
 
     override fun register() {
-        val helpQueryArgument = StringArgument.newBuilder<Commander>("query")
+        val helpQueryArgument = StringArgument.builder<Commander>("query")
             .greedy()
             .asOptional()
             .withSuggestionsProvider { context, _ ->
