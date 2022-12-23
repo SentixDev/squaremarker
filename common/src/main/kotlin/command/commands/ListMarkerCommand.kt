@@ -36,7 +36,6 @@ class ListMarkerCommand(plugin: SquareMarker, commands: Commands) :
         } else {
             Components.send(sender, Lang.EMPTY)
         }
-
     }
 
     private fun sendMarkerList(sender: Commander, markerList: MutableList<Marker>) {
@@ -55,11 +54,11 @@ class ListMarkerCommand(plugin: SquareMarker, commands: Commands) :
             Components.send(
                 sender,
                 " <gray>× <color:#8411FB>${marker.id} <color:#8411FB>${
-                    Components.clickable(
-                        "<dark_gray>[<color:#8411FB>SHOW</color>]",
-                        "<color:#8411FB>SHOW",
-                        "/squaremarker show ${marker.id}"
-                    )
+                Components.clickable(
+                    "<dark_gray>[<color:#8411FB>SHOW</color>]",
+                    "<color:#8411FB>SHOW",
+                    "/squaremarker show ${marker.id}"
+                )
                 }"
             )
         }
@@ -71,5 +70,4 @@ class ListMarkerCommand(plugin: SquareMarker, commands: Commands) :
         )
         Components.send(sender, "")
     }
-
 }

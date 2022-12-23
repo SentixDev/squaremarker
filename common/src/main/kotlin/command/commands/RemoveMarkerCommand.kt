@@ -37,7 +37,5 @@ class RemoveMarkerCommand(plugin: SquareMarker, commands: Commands) :
         } else {
             Components.sendPrefixed(sender, "<gray>No marker with ID <color:#8411FB>$id <gray>found.</gray>")
         }
-
     }
-
 }

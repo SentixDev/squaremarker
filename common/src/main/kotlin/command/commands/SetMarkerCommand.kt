@@ -72,16 +72,14 @@ class SetMarkerCommand(plugin: SquareMarker, commands: Commands) :
 
             try {
                 SquaremapProvider.get().iconRegistry().register(
-                    Key.key(marker.iconKey), ImageIO.read(
+                    Key.key(marker.iconKey),
+                    ImageIO.read(
                         URL(marker.iconUrl)
                     )
                 )
             } catch (ex: Exception) {
                 Components.sendPrefixed(sender, "<gray>Marker icon set to default.")
             }
-
         }
-
     }
-
 }

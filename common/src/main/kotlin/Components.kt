@@ -44,5 +44,4 @@ object Components {
     fun gradient(input: String): String {
         return "<gradient:#C028FF:#5B00FF>$input</gradient>"
     }
-
 }

@@ -9,5 +9,4 @@ object Lang {
     const val EMPTY = "$PREFIX <red>No markers set.</red>"
 
     val HELP = Components.clickable("$PREFIX ", Components.gradient("Click for SquareMarker command help"), "/${SquareMarker.instance.config.commandLabel} help")
-
 }

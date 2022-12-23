@@ -25,9 +25,11 @@ class Commands(
 ) {
     init {
         registerExceptionHandlers()
-        commandManager.commandSuggestionProcessor(FilteringCommandSuggestionProcessor(
-            FilteringCommandSuggestionProcessor.Filter.contains<Commander>(true).andTrimBeforeLastSpace()
-        ))
+        commandManager.commandSuggestionProcessor(
+            FilteringCommandSuggestionProcessor(
+                FilteringCommandSuggestionProcessor.Filter.contains<Commander>(true).andTrimBeforeLastSpace()
+            )
+        )
     }
 
     fun registerCommands() {

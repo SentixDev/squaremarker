@@ -89,5 +89,4 @@ object API {
         providerMap.clear()
         executor.shutdownNow()
     }
-
 }

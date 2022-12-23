@@ -77,7 +77,8 @@ class UpdateMarkerCommand(plugin: SquareMarker, commands: Commands) :
 
             try {
                 SquaremapProvider.get().iconRegistry().register(
-                    Key.key(marker.iconKey), ImageIO.read(
+                    Key.key(marker.iconKey),
+                    ImageIO.read(
                         URL(marker.iconUrl)
                     )
                 )
@@ -87,11 +88,8 @@ class UpdateMarkerCommand(plugin: SquareMarker, commands: Commands) :
 
             MarkerService.updateMarker(marker)
             Components.sendPrefixed(sender, "<gray>Updated existing marker with ID <color:#8411FB>$id<gray>.</gray>")
-
         } else {
             Components.sendPrefixed(sender, "<gray>No marker with ID <color:#8411FB>$id <gray>found.</gray>")
         }
-
     }
-
 }

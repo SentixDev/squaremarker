@@ -38,5 +38,4 @@ object IO {
     fun read(): String {
         return markerFile.bufferedReader().use { it.readText() }
     }
-
 }

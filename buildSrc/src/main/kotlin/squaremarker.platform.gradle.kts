@@ -1,5 +1,5 @@
 plugins {
-    base
+    id("squaremarker.base")
 }
 
 val platform = extensions.create("squareMarker", SquareMarkerPlatformExtension::class)

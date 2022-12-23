@@ -1,6 +1,5 @@
 package dev.sentix.squaremarker.command.commands
 
-import cloud.commandframework.CommandHelpHandler
 import cloud.commandframework.arguments.standard.StringArgument
 import cloud.commandframework.context.CommandContext
 import cloud.commandframework.minecraft.extras.AudienceProvider
@@ -27,9 +26,8 @@ class HelpCommand(plugin: SquareMarker, commands: Commands) :
             .greedy()
             .asOptional()
             .withSuggestionsProvider { context, _ ->
-                val indexHelpTopic = commands.commandManager.createCommandHelpHandler()
-                    .queryHelp(context.sender, "") as CommandHelpHandler.IndexHelpTopic<Commander>
-                indexHelpTopic.entries.map { it.syntaxString }.toList()
+                commands.commandManager.createCommandHelpHandler().queryRootIndex(context.sender)
+                    .entries.map { it.syntaxString }.toList()
             }
             .build()
 
@@ -43,7 +41,7 @@ class HelpCommand(plugin: SquareMarker, commands: Commands) :
     }
 
     private fun execute(context: CommandContext<Commander>) {
-        help.queryCommands(context.getOrDefault("query", "")!!, context.sender)
+        help.queryCommands(context.getOrDefault("query", ""), context.sender)
     }
 
     private fun createHelp(): MinecraftHelp<Commander> {

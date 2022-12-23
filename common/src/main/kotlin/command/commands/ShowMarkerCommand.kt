@@ -37,9 +37,7 @@ class ShowMarkerCommand(plugin: SquareMarker, commands: Commands) :
         } else {
             Components.sendPrefixed(sender, "<gray>No marker with ID <color:#8411FB>$id <gray>found.</gray>")
         }
-
     }
-
 
     private fun sendMarkerOverview(sender: Commander, marker: Marker) {
         val gradient = Components.gradient("<b>Marker</b>")
@@ -62,11 +60,12 @@ class ShowMarkerCommand(plugin: SquareMarker, commands: Commands) :
         }
         if (marker.iconUrl.isNotBlank()) {
             Components.send(
-                sender, " <gray>× <color:#8411FB>URL <dark_gray>| <color:#8411FB>${
-                    Components.url(
-                        "<color:#8411FB><u>${marker.iconUrl}", "<color:#8411FB>SHOW",
-                        marker.iconUrl
-                    )
+                sender,
+                " <gray>× <color:#8411FB>URL <dark_gray>| <color:#8411FB>${
+                Components.url(
+                    "<color:#8411FB><u>${marker.iconUrl}", "<color:#8411FB>SHOW",
+                    marker.iconUrl
+                )
                 }"
             )
         }
@@ -75,28 +74,29 @@ class ShowMarkerCommand(plugin: SquareMarker, commands: Commands) :
         Components.send(
             sender,
             " <gray>× ${
-                Components.clickable(
-                    "<dark_gray>[<color:#8411FB>UPDATE</color>]",
-                    "<color:#8411FB>UPDATE MARKER",
-                    "suggest_command",
-                    "/squaremarker update ${marker.id} "
-                )
+            Components.clickable(
+                "<dark_gray>[<color:#8411FB>UPDATE</color>]",
+                "<color:#8411FB>UPDATE MARKER",
+                "suggest_command",
+                "/squaremarker update ${marker.id} "
+            )
             } ${
-                Components.clickable(
-                    "<dark_gray>[<color:#8411FB>REMOVE</color>]",
-                    "<color:#8411FB>REMOVE MARKER",
-                    "/squaremarker remove ${marker.id}"
-                )
+            Components.clickable(
+                "<dark_gray>[<color:#8411FB>REMOVE</color>]",
+                "<color:#8411FB>REMOVE MARKER",
+                "/squaremarker remove ${marker.id}"
+            )
             }"
         )
         Components.send(sender, "")
         Components.send(
-            sender, " <gray>× ${
-                Components.clickable(
-                    "<dark_gray>[<color:#8411FB>LIST</color>]",
-                    "<color:#8411FB>SHOW LIST",
-                    "/squaremarker list"
-                )
+            sender,
+            " <gray>× ${
+            Components.clickable(
+                "<dark_gray>[<color:#8411FB>LIST</color>]",
+                "<color:#8411FB>SHOW LIST",
+                "/squaremarker list"
+            )
             }"
         )
         Components.send(sender, "")
@@ -106,5 +106,4 @@ class ShowMarkerCommand(plugin: SquareMarker, commands: Commands) :
         )
         Components.send(sender, "")
     }
-
 }

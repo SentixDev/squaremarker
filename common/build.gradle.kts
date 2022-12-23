@@ -1,3 +1,7 @@
+plugins {
+    id("squaremarker.base")
+}
+
 val squaremapVersion: String by rootProject
 val cloudVersion: String by rootProject
 val adventureVersion: String by rootProject

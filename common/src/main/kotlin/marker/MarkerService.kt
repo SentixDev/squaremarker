@@ -5,8 +5,8 @@ import dev.sentix.squaremarker.IO
 
 object MarkerService {
 
-    fun getMarkerList() : MutableList<Marker> {
-        val type = object : TypeToken<MutableList<Marker>>(){}.type
+    fun getMarkerList(): MutableList<Marker> {
+        val type = object : TypeToken<MutableList<Marker>>() {}.type
         return IO.gson.fromJson(IO.read(), type)
     }
 
@@ -38,5 +38,4 @@ object MarkerService {
         removeMarker(marker.id)
         addMarker(marker)
     }
-
 }

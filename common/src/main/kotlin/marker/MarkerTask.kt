@@ -37,9 +37,7 @@ class MarkerTask(world: MapWorld, provider: SimpleLayerProvider) : Runnable {
                     marker.posZ
                 )
             }
-
         }
-
     }
 
     private fun handle(id: Int, name: String, iconKey: Key, x: Double, z: Double) {
@@ -65,5 +63,4 @@ class MarkerTask(world: MapWorld, provider: SimpleLayerProvider) : Runnable {
         this.world = world
         this.provider = provider
     }
-
 }
