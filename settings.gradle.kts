@@ -4,8 +4,8 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         maven("https://maven.fabricmc.net/")
-        maven("https://maven.quiltmc.org/repository/release/")
-        maven("https://repo.jpenilla.xyz/snapshots/")
+        maven("https://maven.architectury.dev/")
+        maven("https://repo.papermc.io/repository/maven-public/")
     }
 }
 
@@ -21,7 +21,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("quiet-fabric-loom") version "1.0-SNAPSHOT"
+    id("dev.architectury.loom") version "1.1-SNAPSHOT"
 }
 
 include("common")
@@ -29,6 +29,9 @@ project(":common").name = "squaremarker-common"
 
 include("fabric")
 project(":fabric").name = "squaremarker-fabric"
+
+include("forge")
+project(":forge").name = "squaremarker-forge"
 
 include("paper")
 project(":paper").name = "squaremarker-paper"
