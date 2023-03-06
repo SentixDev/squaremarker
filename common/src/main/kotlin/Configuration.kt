@@ -7,7 +7,7 @@ class Configuration {
     val commandLabel = "squaremarker"
     val commandAliases = mutableListOf("marker", "squaremapmarker", "smarker")
     val layerName = "Marker"
-    val iconUrl = "https://cdn.upload.systems/uploads/1zRKxN3t.png"
+    val iconUrl = "https://github.com/SentixDev/squaremarker/raw/master/resources/default_icon.png"
     val iconSize = 16
     val showControls = true
     val defaultHidden = false
