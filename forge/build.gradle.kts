@@ -4,12 +4,14 @@ plugins {
 
 val cloudVersion: String by rootProject
 val adventureVersion: String by rootProject
+val forgeVersion: String by rootProject
+val cloudForgeVersion: String by rootProject
 
 dependencies {
-    forge("net.minecraftforge:forge:1.19.3-44.1.0")
+    forge("net.minecraftforge:forge:$forgeVersion")
 
     // We don't include() these since squaremap already does and we depend on it
-    modImplementation("cloud.commandframework:cloud-forge:1.0.0+1.19.3-SNAPSHOT")
+    modImplementation("cloud.commandframework:cloud-forge:$cloudForgeVersion")
     compileOnly("net.kyori:adventure-api:$adventureVersion")
 }
 

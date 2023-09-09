@@ -21,7 +21,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("dev.architectury.loom") version "1.1-SNAPSHOT"
+    id("dev.architectury.loom") version "1.3-SNAPSHOT"
 }
 
 include("common")

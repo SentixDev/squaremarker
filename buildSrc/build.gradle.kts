@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
     implementation("org.jlleitschuh.gradle:ktlint-gradle:11.0.0")
-    implementation("com.github.johnrengelman:shadow:8.1.0")
-    implementation("dev.architectury:architectury-loom:1.1-SNAPSHOT")
+    implementation("com.github.johnrengelman:shadow:8.1.1")
+    implementation("dev.architectury:architectury-loom:1.3-SNAPSHOT")
 }

@@ -13,7 +13,7 @@ open class FabricCommander(val sender: CommandSourceStack) : Commander, Forwardi
 
     class Player(sender: CommandSourceStack, private val player: ServerPlayer) : FabricCommander(sender), PlayerCommander {
         override val world: WorldIdentifier
-            get() = WorldIdentifier.parse(player.level.dimension().location().toString())
+            get() = WorldIdentifier.parse(player.level().dimension().location().toString())
         override val x: Double
             get() = player.x
         override val y: Double
