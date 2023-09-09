@@ -38,7 +38,7 @@ command-aliases:
 layer-name: Marker
 
 # Define the link to the marker-icon-image
-icon-url: https://cdn.upload.systems/uploads/1zRKxN3t.png
+icon-url: https://github.com/SentixDev/squaremarker/raw/master/resources/default_icon.png
 
 # Define the icon size
 icon-size: 16
