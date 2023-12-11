@@ -1,6 +1,5 @@
 package dev.sentix.squaremarker.paper
 
-import cloud.commandframework.execution.CommandExecutionCoordinator
 import cloud.commandframework.paper.PaperCommandManager
 import dev.sentix.squaremarker.SquareMarker
 import dev.sentix.squaremarker.command.BrigadierSetup
@@ -39,7 +38,7 @@ class SquareMarkerPlugin : JavaPlugin(), Listener {
     private fun createCommandManager(): PaperCommandManager<Commander> {
         val mgr = PaperCommandManager(
             this,
-            CommandExecutionCoordinator.simpleCoordinator(),
+            ExecutionCoordinator.synchronizedOnFolia<Commander>(),
             { sender -> PaperCommander.create(sender) },
             { commander -> (commander as PaperCommander).sender }
         )

@@ -1,0 +1,13 @@
+name: squaremarker
+version: $version
+main: dev.sentix.squaremarker.paper.SquareMarkerPlugin
+description: Marker addon for squaremap
+load: POSTWORLD
+authors:
+  - Sentix
+website: https://github.com/SentixDev/squaremarker
+depend:
+  - squaremap
+prefix: squaremarker
+api-version: 1.19
+folia-supported: true

@@ -1,6 +1,5 @@
 plugins {
     id("squaremarker.platform")
-    id("net.minecrell.plugin-yml.bukkit") version "0.5.3"
 }
 
 val minecraftVersion: String by rootProject
@@ -47,15 +46,5 @@ tasks {
 
 squareMarker {
     productionJar.set(tasks.shadowJar.flatMap { it.archiveFile })
-}
-
-bukkit {
-    depend = listOf("squaremap")
-    load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD
-    name = "squaremarker"
-    prefix = "squaremarker"
-    main = "dev.sentix.squaremarker.paper.SquareMarkerPlugin"
-    apiVersion = "1.19"
-    authors = listOf("Sentix")
-    website = "https://github.com/SentixDev/squaremarker"
+    modInfoFilePath = "plugin.yml"
 }

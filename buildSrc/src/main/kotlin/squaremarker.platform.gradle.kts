@@ -27,3 +27,13 @@ tasks {
         dependsOn(copyJar)
     }
 }
+
+afterEvaluate {
+    tasks.processResources {
+        inputs.property("version", project.version)
+
+        filesMatching(platform.modInfoFilePath.get()) {
+            expand("version" to project.version)
+        }
+    }
+}

@@ -36,13 +36,3 @@ tasks {
         archiveFileName.set("${project.name}-mc$minecraftVersion-${project.version}.jar")
     }
 }
-
-afterEvaluate {
-    tasks.processResources {
-        inputs.property("version", project.version)
-
-        filesMatching(markerExt.modInfoFilePath.get()) {
-            expand("version" to project.version)
-        }
-    }
-}
