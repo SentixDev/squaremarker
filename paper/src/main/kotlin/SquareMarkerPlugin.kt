@@ -18,16 +18,17 @@ class SquareMarkerPlugin : JavaPlugin(), Listener {
     private lateinit var squareMarker: SquareMarker
 
     override fun onEnable() {
-        squareMarker = SquareMarker(
-            createCommandManager(),
-            dataFolder.toPath().resolve("config.yml"),
-            dataFolder.toPath(),
-            PaperWorldIdentifierSerializer(server)
-        ).also { it.init() }
+        squareMarker =
+            SquareMarker(
+                createCommandManager(),
+                dataFolder.toPath().resolve("config.yml"),
+                dataFolder.toPath(),
+                PaperWorldIdentifierSerializer(server),
+            ).also { it.init() }
 
         server.pluginManager.registerEvents(this, this)
 
-        /* https://bstats.org/plugin/bukkit/squaremarker/14117 */
+        // https://bstats.org/plugin/bukkit/squaremarker/14117
         Metrics(this, 14117)
     }
 
@@ -36,12 +37,13 @@ class SquareMarkerPlugin : JavaPlugin(), Listener {
     }
 
     private fun createCommandManager(): PaperCommandManager<Commander> {
-        val mgr = PaperCommandManager(
-            this,
-            ExecutionCoordinator.synchronizedOnFolia<Commander>(),
-            { sender -> PaperCommander.create(sender) },
-            { commander -> (commander as PaperCommander).sender }
-        )
+        val mgr =
+            PaperCommandManager(
+                this,
+                ExecutionCoordinator.synchronizedOnFolia<Commander>(),
+                { sender -> PaperCommander.create(sender) },
+                { commander -> (commander as PaperCommander).sender },
+            )
         mgr.registerAsynchronousCompletions()
         mgr.registerBrigadier()
         BrigadierSetup.setup(mgr)

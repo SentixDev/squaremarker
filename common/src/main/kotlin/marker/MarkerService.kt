@@ -4,7 +4,6 @@ import com.google.gson.reflect.TypeToken
 import dev.sentix.squaremarker.IO
 
 object MarkerService {
-
     fun getMarkerList(): MutableList<Marker> {
         val type = object : TypeToken<MutableList<Marker>>() {}.type
         return IO.gson.fromJson(IO.read(), type)

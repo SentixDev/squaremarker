@@ -3,9 +3,11 @@ rootProject.name = "squaremarker"
 pluginManagement {
     repositories {
         gradlePluginPortal()
+        mavenCentral()
+        maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://maven.fabricmc.net/")
         maven("https://maven.architectury.dev/")
-        maven("https://repo.papermc.io/repository/maven-public/")
+        maven("https://repo.jpenilla.xyz/snapshots/")
     }
 }
 
@@ -21,7 +23,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("dev.architectury.loom") version "1.3-SNAPSHOT"
+    id("xyz.jpenilla.quiet-architectury-loom") version "1.4-SNAPSHOT"
 }
 
 include("common")
@@ -30,8 +32,8 @@ project(":common").name = "squaremarker-common"
 include("fabric")
 project(":fabric").name = "squaremarker-fabric"
 
-include("forge")
-project(":forge").name = "squaremarker-forge"
+include("neoforge")
+project(":neoforge").name = "squaremarker-neoforge"
 
 include("paper")
 project(":paper").name = "squaremarker-paper"

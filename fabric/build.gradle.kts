@@ -17,5 +17,5 @@ dependencies {
 }
 
 squareMarker {
-    modInfoFilePath.set("fabric.mod.json")
+    modInfoFilePath = "fabric.mod.json"
 }

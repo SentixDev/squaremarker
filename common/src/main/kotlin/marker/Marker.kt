@@ -10,5 +10,5 @@ data class Marker(
     val world: WorldIdentifier,
     val posX: Double,
     val posY: Double,
-    val posZ: Double
+    val posZ: Double,
 )

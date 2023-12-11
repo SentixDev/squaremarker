@@ -13,9 +13,8 @@ import dev.sentix.squaremarker.marker.MarkerService
 class RemoveMarkerCommand(plugin: SquareMarker, commands: Commands) :
     SquaremarkerCommand(
         plugin,
-        commands
+        commands,
     ) {
-
     override fun register() {
         commands.registerSubcommand { builder ->
             builder.literal("remove")

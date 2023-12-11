@@ -1,6 +1,6 @@
 plugins {
     id("squaremarker.platform")
-    id("dev.architectury.loom")
+    id("xyz.jpenilla.quiet-architectury-loom")
     id("com.github.johnrengelman.shadow")
 }
 
@@ -11,16 +11,14 @@ configurations.implementation {
     extendsFrom(projectImpl)
 }
 
-loom.silentMojangMappingsLicense()
-
 dependencies {
     minecraft("com.mojang:minecraft:$minecraftVersion")
     mappings(loom.officialMojangMappings())
     projectImpl(project(":squaremarker-common"))
 }
 
-val markerExt = the<SquareMarkerPlatformExtension>()
-markerExt.productionJar.set(tasks.remapJar.flatMap { it.archiveFile })
+val markerExt = extensions.getByType<SquareMarkerPlatformExtension>()
+markerExt.productionJar = tasks.remapJar.flatMap { it.archiveFile }
 
 tasks {
     shadowJar {

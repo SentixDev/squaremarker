@@ -13,7 +13,7 @@ class SquareMarker(
     commandManager: CommandManager<Commander>,
     private val configFile: Path,
     dataDir: Path,
-    val worldIdentifierSerializer: Any = WorldIdentifierSerializer
+    val worldIdentifierSerializer: Any = WorldIdentifierSerializer,
 ) {
     companion object {
         val logger: ComponentLogger = ComponentLogger.logger(SquareMarker::class.java)
@@ -40,10 +40,11 @@ class SquareMarker(
     }
 
     private fun loadConfiguration(): Configuration {
-        val loader = YamlConfigurationLoader.builder()
-            .path(configFile)
-            .nodeStyle(NodeStyle.BLOCK)
-            .build()
+        val loader =
+            YamlConfigurationLoader.builder()
+                .path(configFile)
+                .nodeStyle(NodeStyle.BLOCK)
+                .build()
         val node = loader.load()
         val configInst = node.get(Configuration::class.java) ?: error("Error reading config")
         val save = loader.createNode()

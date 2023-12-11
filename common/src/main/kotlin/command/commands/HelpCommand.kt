@@ -16,20 +16,20 @@ import net.kyori.adventure.text.format.TextColor
 class HelpCommand(plugin: SquareMarker, commands: Commands) :
     SquaremarkerCommand(
         plugin,
-        commands
+        commands,
     ) {
-
     private val help = createHelp()
 
     override fun register() {
-        val helpQueryArgument = StringArgument.builder<Commander>("query")
-            .greedy()
-            .asOptional()
-            .withSuggestionsProvider { context, _ ->
-                commands.commandManager.createCommandHelpHandler().queryRootIndex(context.sender)
-                    .entries.map { it.syntaxString }.toList()
-            }
-            .build()
+        val helpQueryArgument =
+            StringArgument.builder<Commander>("query")
+                .greedy()
+                .asOptional()
+                .withSuggestionsProvider { context, _ ->
+                    commands.commandManager.createCommandHelpHandler().queryRootIndex(context.sender)
+                        .entries.map { it.syntaxString }.toList()
+                }
+                .build()
 
         commands.registerSubcommand { builder ->
             builder.literal("help")
@@ -45,18 +45,20 @@ class HelpCommand(plugin: SquareMarker, commands: Commands) :
     }
 
     private fun createHelp(): MinecraftHelp<Commander> {
-        val help = MinecraftHelp(
-            "/${squareMarker.config.commandLabel} help",
-            AudienceProvider.nativeAudience(),
-            commands.commandManager
-        )
-        help.helpColors = MinecraftHelp.HelpColors.of(
-            TextColor.color(0x5B00FF),
-            NamedTextColor.WHITE,
-            TextColor.color(0xC028FF),
-            NamedTextColor.GRAY,
-            NamedTextColor.DARK_GRAY
-        )
+        val help =
+            MinecraftHelp(
+                "/${squareMarker.config.commandLabel} help",
+                AudienceProvider.nativeAudience(),
+                commands.commandManager,
+            )
+        help.helpColors =
+            MinecraftHelp.HelpColors.of(
+                TextColor.color(0x5B00FF),
+                NamedTextColor.WHITE,
+                TextColor.color(0xC028FF),
+                NamedTextColor.GRAY,
+                NamedTextColor.DARK_GRAY,
+            )
         help.setMessage(MinecraftHelp.MESSAGE_HELP_TITLE, "squaremarker command help")
         return help
     }

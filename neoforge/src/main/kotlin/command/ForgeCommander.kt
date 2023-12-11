@@ -24,8 +24,9 @@ open class ForgeCommander(val sender: CommandSourceStack) : Commander, Forwardin
     }
 
     companion object {
-        val commandSourceAudienceMethod: Method = Class.forName("xyz.jpenilla.squaremap.forge.ForgeAdventure")
-            .getDeclaredMethod("commandSourceAudience", CommandSourceStack::class.java)
+        val commandSourceAudienceMethod: Method =
+            Class.forName("xyz.jpenilla.squaremap.forge.ForgeAdventure")
+                .getDeclaredMethod("commandSourceAudience", CommandSourceStack::class.java)
 
         fun create(sender: CommandSourceStack): Commander {
             if (sender.player != null) {

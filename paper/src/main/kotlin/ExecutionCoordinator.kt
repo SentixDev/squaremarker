@@ -16,16 +16,17 @@ import java.util.function.Function
 
 class ExecutionCoordinator<C>(commandTree: CommandTree<C>) : CommandExecutionCoordinator<C>(commandTree) {
     companion object {
-        fun <T> synchronizedOnFolia(): Function<CommandTree<T>, CommandExecutionCoordinator<T>> = Function {
-            ExecutionCoordinator(it)
-        }
+        fun <T> synchronizedOnFolia(): Function<CommandTree<T>, CommandExecutionCoordinator<T>> =
+            Function {
+                ExecutionCoordinator(it)
+            }
     }
 
     private val executionLock: ReentrantLock? = if (folia) ReentrantLock() else null
 
     override fun coordinateExecution(
         commandContext: CommandContext<C>,
-        input: Queue<String>
+        input: Queue<String>,
     ): CompletableFuture<CommandResult<C>> {
         val completableFuture = CompletableFuture<CommandResult<C>>()
         try {

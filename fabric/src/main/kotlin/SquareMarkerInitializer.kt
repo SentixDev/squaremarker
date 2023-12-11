@@ -23,11 +23,12 @@ class SquareMarkerInitializer : ModInitializer {
         val modContainer: ModContainer = FabricLoader.getInstance().getModContainer("squaremarker").orElseThrow()
     }
 
-    private val squareMarker: SquareMarker = SquareMarker(
-        createCommandManager(),
-        FabricLoader.getInstance().configDir.resolve("${modContainer.metadata.id}.yml"),
-        FabricLoader.getInstance().gameDir.resolve(modContainer.metadata.id)
-    )
+    private val squareMarker: SquareMarker =
+        SquareMarker(
+            createCommandManager(),
+            FabricLoader.getInstance().configDir.resolve("${modContainer.metadata.id}.yml"),
+            FabricLoader.getInstance().gameDir.resolve(modContainer.metadata.id),
+        )
 
     override fun onInitialize() {
         // Ensure we initialize after squaremap regardless of load order (future squaremap versions should provide a better mechanism)
@@ -38,24 +39,25 @@ class SquareMarkerInitializer : ModInitializer {
         val late = ResourceLocation("squaremarker:late")
         ServerWorldEvents.LOAD.register(late) { _, world ->
             SquaremapProvider.get().getWorldIfEnabled(
-                WorldIdentifier.parse(world.dimension().location().toString())
+                WorldIdentifier.parse(world.dimension().location().toString()),
             ).ifPresent(API::initWorld)
         }
         ServerWorldEvents.LOAD.addPhaseOrdering(Event.DEFAULT_PHASE, late)
 
         ServerWorldEvents.UNLOAD.register { _, world ->
             SquaremapProvider.get().getWorldIfEnabled(
-                WorldIdentifier.parse(world.dimension().location().toString())
+                WorldIdentifier.parse(world.dimension().location().toString()),
             ).ifPresent(API::unloadWorld)
         }
     }
 
     private fun createCommandManager(): CommandManager<Commander> {
-        val mgr = FabricServerCommandManager(
-            CommandExecutionCoordinator.simpleCoordinator(),
-            { stack -> FabricCommander.create(stack) },
-            { commander -> (commander as FabricCommander).sender }
-        )
+        val mgr =
+            FabricServerCommandManager(
+                CommandExecutionCoordinator.simpleCoordinator(),
+                { stack -> FabricCommander.create(stack) },
+                { commander -> (commander as FabricCommander).sender },
+            )
         BrigadierSetup.setup(mgr)
         return mgr
     }

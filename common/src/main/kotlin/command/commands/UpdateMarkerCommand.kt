@@ -21,9 +21,8 @@ import javax.imageio.ImageIO
 class UpdateMarkerCommand(plugin: SquareMarker, commands: Commands) :
     SquaremarkerCommand(
         plugin,
-        commands
+        commands,
     ) {
-
     override fun register() {
         commands.registerSubcommand { builder ->
             builder.literal("update")
@@ -57,19 +56,19 @@ class UpdateMarkerCommand(plugin: SquareMarker, commands: Commands) :
             url = "http${split[1]}"
         }
 
-        val marker = Marker(
-            id,
-            content.trim(),
-            url.trim(),
-            iconKey,
-            sender.world,
-            sender.x,
-            sender.y,
-            sender.z
-        )
+        val marker =
+            Marker(
+                id,
+                content.trim(),
+                url.trim(),
+                iconKey,
+                sender.world,
+                sender.x,
+                sender.y,
+                sender.z,
+            )
 
         if (MarkerService.markerExist(id)) {
-
             if (MarkerService.getMarker(id).iconUrl.isNotBlank()) {
                 SquaremapProvider.get().iconRegistry().unregister(Key.key(marker.iconKey))
                 File("${SquaremapProvider.get().webDir()}/images/icon/registered/${marker.iconKey}.png").delete()
@@ -79,8 +78,8 @@ class UpdateMarkerCommand(plugin: SquareMarker, commands: Commands) :
                 SquaremapProvider.get().iconRegistry().register(
                     Key.key(marker.iconKey),
                     ImageIO.read(
-                        URL(marker.iconUrl)
-                    )
+                        URL(marker.iconUrl),
+                    ),
                 )
             } catch (ex: Exception) {
                 Components.sendPrefixed(sender, "<gray>Marker icon set to default.")
