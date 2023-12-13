@@ -20,9 +20,8 @@ import kotlin.random.Random.Default.nextInt
 class SetMarkerCommand(plugin: SquareMarker, commands: Commands) :
     SquaremarkerCommand(
         plugin,
-        commands
+        commands,
     ) {
-
     override fun register() {
         commands.registerSubcommand { builder ->
             builder.literal("set")
@@ -55,16 +54,17 @@ class SetMarkerCommand(plugin: SquareMarker, commands: Commands) :
             url = "http${split[1]}"
         }
 
-        val marker = Marker(
-            id,
-            content.trim(),
-            url.trim(),
-            iconKey,
-            sender.world,
-            sender.x,
-            sender.y,
-            sender.z
-        )
+        val marker =
+            Marker(
+                id,
+                content.trim(),
+                url.trim(),
+                iconKey,
+                sender.world,
+                sender.x,
+                sender.y,
+                sender.z,
+            )
 
         if (!MarkerService.markerExist(id)) {
             MarkerService.addMarker(marker)
@@ -74,8 +74,8 @@ class SetMarkerCommand(plugin: SquareMarker, commands: Commands) :
                 SquaremapProvider.get().iconRegistry().register(
                     Key.key(marker.iconKey),
                     ImageIO.read(
-                        URL(marker.iconUrl)
-                    )
+                        URL(marker.iconUrl),
+                    ),
                 )
             } catch (ex: Exception) {
                 Components.sendPrefixed(sender, "<gray>Marker icon set to default.")

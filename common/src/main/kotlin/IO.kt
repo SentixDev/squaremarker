@@ -10,14 +10,15 @@ import kotlin.io.path.createDirectories
 import kotlin.io.path.exists
 
 object IO {
+    val gson: Gson =
+        GsonBuilder()
+            .registerTypeAdapter(WorldIdentifier::class.java, SquareMarker.instance.worldIdentifierSerializer)
+            .create()
 
-    val gson: Gson = GsonBuilder()
-        .registerTypeAdapter(WorldIdentifier::class.java, SquareMarker.instance.worldIdentifierSerializer)
-        .create()
-
-    private val gsonPrettier: Gson = gson.newBuilder()
-        .setPrettyPrinting()
-        .create()
+    private val gsonPrettier: Gson =
+        gson.newBuilder()
+            .setPrettyPrinting()
+            .create()
 
     private val markerFile = SquareMarker.instance.markerFile
 

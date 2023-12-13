@@ -14,9 +14,8 @@ import dev.sentix.squaremarker.marker.MarkerService
 class ListMarkerCommand(plugin: SquareMarker, commands: Commands) :
     SquaremarkerCommand(
         plugin,
-        commands
+        commands,
     ) {
-
     override fun register() {
         commands.registerSubcommand { builder ->
             builder.literal("list")
@@ -38,13 +37,16 @@ class ListMarkerCommand(plugin: SquareMarker, commands: Commands) :
         }
     }
 
-    private fun sendMarkerList(sender: Commander, markerList: MutableList<Marker>) {
+    private fun sendMarkerList(
+        sender: Commander,
+        markerList: MutableList<Marker>,
+    ) {
         val gradient = Components.gradient("<b>Marker</b>")
 
         Components.send(sender, "")
         Components.send(
             sender,
-            "<dark_gray>» <dark_gray><st>-------------<reset> <gray>× $gradient <gray>× <dark_gray><st>-------------<reset> <dark_gray>«"
+            "<dark_gray>» <dark_gray><st>-------------<reset> <gray>× $gradient <gray>× <dark_gray><st>-------------<reset> <dark_gray>«",
         )
         Components.send(sender, "")
 
@@ -54,19 +56,19 @@ class ListMarkerCommand(plugin: SquareMarker, commands: Commands) :
             Components.send(
                 sender,
                 " <gray>× <color:#8411FB>${marker.id} <color:#8411FB>${
-                Components.clickable(
-                    "<dark_gray>[<color:#8411FB>SHOW</color>]",
-                    "<color:#8411FB>SHOW",
-                    "/squaremarker show ${marker.id}"
-                )
-                }"
+                    Components.clickable(
+                        "<dark_gray>[<color:#8411FB>SHOW</color>]",
+                        "<color:#8411FB>SHOW",
+                        "/squaremarker show ${marker.id}",
+                    )
+                }",
             )
         }
 
         Components.send(sender, "")
         Components.send(
             sender,
-            "<dark_gray>» <dark_gray><st>-------------<reset> <gray>× $gradient <gray>× <dark_gray><st>-------------<reset> <dark_gray>«"
+            "<dark_gray>» <dark_gray><st>-------------<reset> <gray>× $gradient <gray>× <dark_gray><st>-------------<reset> <dark_gray>«",
         )
         Components.send(sender, "")
     }

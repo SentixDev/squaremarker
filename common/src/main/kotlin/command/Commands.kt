@@ -21,14 +21,14 @@ import net.kyori.adventure.text.format.NamedTextColor
 
 class Commands(
     private val squareMarker: SquareMarker,
-    val commandManager: CommandManager<Commander>
+    val commandManager: CommandManager<Commander>,
 ) {
     init {
         registerExceptionHandlers()
         commandManager.commandSuggestionProcessor(
             FilteringCommandSuggestionProcessor(
-                FilteringCommandSuggestionProcessor.Filter.contains<Commander>(true).andTrimBeforeLastSpace()
-            )
+                FilteringCommandSuggestionProcessor.Filter.contains<Commander>(true).andTrimBeforeLastSpace(),
+            ),
         )
     }
 
@@ -50,10 +50,11 @@ class Commands(
             .withCommandExecutionHandler()
             .withHandler(MinecraftExceptionHandler.ExceptionType.INVALID_SENDER) { _, ex ->
                 ex as InvalidCommandSenderException
-                val requiredTypeDisplayName = when (ex.requiredSender) {
-                    PlayerCommander::class.java -> "Players"
-                    else -> ex.requiredSender.simpleName
-                }
+                val requiredTypeDisplayName =
+                    when (ex.requiredSender) {
+                        PlayerCommander::class.java -> "Players"
+                        else -> ex.requiredSender.simpleName
+                    }
                 text()
                     .content("This command can only be executed by ")
                     .color(NamedTextColor.RED)
@@ -70,7 +71,8 @@ class Commands(
         commandManager.command(builderModifier(rootBuilder()))
     }
 
-    private fun rootBuilder(): Command.Builder<Commander> = commandManager
-        .commandBuilder(squareMarker.config.commandLabel, *squareMarker.config.commandAliases.toTypedArray())
-        .meta(CommandMeta.DESCRIPTION, "Squaremarker command. '/${squareMarker.config.commandLabel} help'")
+    private fun rootBuilder(): Command.Builder<Commander> =
+        commandManager
+            .commandBuilder(squareMarker.config.commandLabel, *squareMarker.config.commandAliases.toTypedArray())
+            .meta(CommandMeta.DESCRIPTION, "Squaremarker command. '/${squareMarker.config.commandLabel} help'")
 }

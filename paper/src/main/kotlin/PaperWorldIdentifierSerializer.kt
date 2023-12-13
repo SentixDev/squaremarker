@@ -17,13 +17,20 @@ import java.lang.reflect.Type
 class PaperWorldIdentifierSerializer(private val server: Server) :
     JsonSerializer<WorldIdentifier>,
     JsonDeserializer<WorldIdentifier> {
-
-    override fun serialize(src: WorldIdentifier?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement {
+    override fun serialize(
+        src: WorldIdentifier?,
+        typeOfSrc: Type,
+        context: JsonSerializationContext,
+    ): JsonElement {
         if (src == null) return JsonNull.INSTANCE
         return JsonPrimitive(src.asString())
     }
 
-    override fun deserialize(json: JsonElement?, typeOfT: Type, context: JsonDeserializationContext): WorldIdentifier? {
+    override fun deserialize(
+        json: JsonElement?,
+        typeOfT: Type,
+        context: JsonDeserializationContext,
+    ): WorldIdentifier? {
         if (json == null || json is JsonNull) return null
         val tryDeserializeKey = NamespacedKey.fromString(json.asString)
         if (tryDeserializeKey != null) {

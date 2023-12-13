@@ -17,12 +17,12 @@ dependencies {
 
 tasks {
     java {
-        toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+        toolchain.languageVersion = JavaLanguageVersion.of(17)
     }
 
     compileJava {
         options.encoding = Charsets.UTF_8.name()
-        options.release.set(17)
+        options.release = 17
     }
 
     compileKotlin {
@@ -30,11 +30,11 @@ tasks {
     }
 
     jar {
-        archiveClassifier.set("not-shadowed")
+        archiveClassifier = "not-shadowed"
     }
 
     shadowJar {
-        archiveClassifier.set(null as String?)
+        archiveClassifier = null as String?
         listOf(
             "cloud.commandframework",
         ).forEach { relocate(it, "${rootProject.group}.lib.$it") }
@@ -45,6 +45,6 @@ tasks {
 }
 
 squareMarker {
-    productionJar.set(tasks.shadowJar.flatMap { it.archiveFile })
+    productionJar = tasks.shadowJar.flatMap { it.archiveFile }
     modInfoFilePath = "plugin.yml"
 }

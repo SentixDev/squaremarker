@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
 
 object API {
-
     val markerIconKey: Key = Key.of("squaremarker_marker_icon_")
 
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
@@ -40,22 +39,24 @@ object API {
             return
         }
 
-        val provider: SimpleLayerProvider = SimpleLayerProvider.builder(SquareMarker.instance.config.layerName).apply {
-            defaultHidden(SquareMarker.instance.config.defaultHidden)
-            showControls(SquareMarker.instance.config.showControls)
-        }.build()
+        val provider: SimpleLayerProvider =
+            SimpleLayerProvider.builder(SquareMarker.instance.config.layerName).apply {
+                defaultHidden(SquareMarker.instance.config.defaultHidden)
+                showControls(SquareMarker.instance.config.showControls)
+            }.build()
         val key = Key.of("squaremarker_marker")
         if (mapWorld.layerRegistry().hasEntry(key)) {
             mapWorld.layerRegistry().unregister(key)
         }
         mapWorld.layerRegistry().register(key, provider)
         val task = MarkerTask(mapWorld, provider)
-        val scheduled = executor.scheduleAtFixedRate(
-            task,
-            0,
-            SquareMarker.instance.config.updateRateMilliseconds,
-            TimeUnit.MILLISECONDS
-        )
+        val scheduled =
+            executor.scheduleAtFixedRate(
+                task,
+                0,
+                SquareMarker.instance.config.updateRateMilliseconds,
+                TimeUnit.MILLISECONDS,
+            )
         providerMap[mapWorld.identifier()] = Pair(scheduled, task)
     }
 
@@ -70,7 +71,7 @@ object API {
                 } catch (ex: Exception) {
                     SquareMarker.logger.warn(
                         Components.parse("${Lang.PREFIX} There is an invalid url in your marker.json. Please fix \"${marker.iconUrl}\"!"),
-                        ex
+                        ex,
                     )
                 }
             }
