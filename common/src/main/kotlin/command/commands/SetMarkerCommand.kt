@@ -48,7 +48,7 @@ class SetMarkerCommand(plugin: SquareMarker, commands: Commands) :
             id = nextInt(9, 100000)
         } while (MarkerService.markerExist(id))
 
-        val iconKey: String = "squaremarker_marker_icon_$id"
+        val iconKey = "squaremarker_marker_icon_$id"
 
         if (input.contains("http")) {
             val split = input.split("http")
