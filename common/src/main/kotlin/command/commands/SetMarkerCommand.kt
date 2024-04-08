@@ -36,15 +36,19 @@ class SetMarkerCommand(plugin: SquareMarker, commands: Commands) :
     private fun execute(context: CommandContext<Commander>) {
         val sender = context.sender as PlayerCommander
 
-        val id: Int = nextInt(9, 100000)
-
-        val iconKey = "squaremarker_marker_icon_$id"
+        var id: Int
 
         val input: String = context.get("input")
 
         var content = input
 
         var url = ""
+
+        do {
+            id = nextInt(9, 100000)
+        } while (MarkerService.markerExist(id))
+
+        val iconKey: String = "squaremarker_marker_icon_$id"
 
         if (input.contains("http")) {
             val split = input.split("http")
