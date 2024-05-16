@@ -1,12 +1,5 @@
 package dev.sentix.squaremarker.command
 
-import cloud.commandframework.Command
-import cloud.commandframework.CommandManager
-import cloud.commandframework.exceptions.InvalidCommandSenderException
-import cloud.commandframework.execution.FilteringCommandSuggestionProcessor
-import cloud.commandframework.meta.CommandMeta
-import cloud.commandframework.minecraft.extras.AudienceProvider
-import cloud.commandframework.minecraft.extras.MinecraftExceptionHandler
 import dev.sentix.squaremarker.Components
 import dev.sentix.squaremarker.Lang
 import dev.sentix.squaremarker.SquareMarker
@@ -18,6 +11,13 @@ import dev.sentix.squaremarker.command.commands.ShowMarkerCommand
 import dev.sentix.squaremarker.command.commands.UpdateMarkerCommand
 import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.format.NamedTextColor
+import org.incendo.cloud.Command
+import org.incendo.cloud.CommandManager
+import org.incendo.cloud.description.Description.description
+import org.incendo.cloud.exception.InvalidCommandSenderException
+import org.incendo.cloud.exception.NoPermissionException
+import org.incendo.cloud.minecraft.extras.MinecraftExceptionHandler
+import org.incendo.cloud.util.TypeUtils
 
 class Commands(
     private val squareMarker: SquareMarker,
@@ -25,11 +25,6 @@ class Commands(
 ) {
     init {
         registerExceptionHandlers()
-        commandManager.commandSuggestionProcessor(
-            FilteringCommandSuggestionProcessor(
-                FilteringCommandSuggestionProcessor.Filter.contains<Commander>(true).andTrimBeforeLastSpace(),
-            ),
-        )
     }
 
     fun registerCommands() {
@@ -44,16 +39,15 @@ class Commands(
     }
 
     private fun registerExceptionHandlers() {
-        MinecraftExceptionHandler<Commander>()
-            .withArgumentParsingHandler()
-            .withInvalidSyntaxHandler()
-            .withCommandExecutionHandler()
-            .withHandler(MinecraftExceptionHandler.ExceptionType.INVALID_SENDER) { _, ex ->
-                ex as InvalidCommandSenderException
+        MinecraftExceptionHandler.createNative<Commander>()
+            .defaultArgumentParsingHandler()
+            .defaultInvalidSenderHandler()
+            .defaultCommandExecutionHandler()
+            .handler(InvalidCommandSenderException::class.java) { _, ctx ->
                 val requiredTypeDisplayName =
-                    when (ex.requiredSender) {
+                    when (ctx.exception().requiredSenderTypes().single()) {
                         PlayerCommander::class.java -> "Players"
-                        else -> ex.requiredSender.simpleName
+                        else -> TypeUtils.simpleName(ctx.exception().requiredSenderTypes().single())
                     }
                 text()
                     .content("This command can only be executed by ")
@@ -62,17 +56,19 @@ class Commands(
                     .append(text('!'))
                     .build()
             }
-            .withHandler(MinecraftExceptionHandler.ExceptionType.NO_PERMISSION) { _, _ -> Components.parse(Lang.NO_PERMISSION) }
-            .withDecorator { Components.parse(Lang.HELP).append(it) }
-            .apply(commandManager, AudienceProvider.nativeAudience())
+            .handler(NoPermissionException::class.java) { _, _ -> Components.parse(Lang.NO_PERMISSION) }
+            .decorator { c -> Components.parse(Lang.HELP).append(c) }
+            .registerTo(commandManager)
     }
 
-    fun registerSubcommand(builderModifier: (Command.Builder<Commander>) -> Command.Builder<Commander>) {
+    fun registerSubcommand(builderModifier: (Command.Builder<Commander>) -> Command.Builder<out Commander>) {
         commandManager.command(builderModifier(rootBuilder()))
     }
 
     private fun rootBuilder(): Command.Builder<Commander> =
-        commandManager
-            .commandBuilder(squareMarker.config.commandLabel, *squareMarker.config.commandAliases.toTypedArray())
-            .meta(CommandMeta.DESCRIPTION, "Squaremarker command. '/${squareMarker.config.commandLabel} help'")
+        commandManager.commandBuilder(
+            squareMarker.config.commandLabel,
+            description("Squaremarker command. '/${squareMarker.config.commandLabel} help'"),
+            *squareMarker.config.commandAliases.toTypedArray(),
+        )
 }

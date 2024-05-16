@@ -15,6 +15,6 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
     implementation("org.jlleitschuh.gradle:ktlint-gradle:12.0.2")
-    implementation("com.github.johnrengelman:shadow:8.1.1")
-    implementation("xyz.jpenilla:quiet-architectury-loom:1.4-SNAPSHOT")
+    implementation("io.github.goooler.shadow:shadow-gradle-plugin:8.1.7")
+    implementation("xyz.jpenilla:quiet-architectury-loom:1.6-SNAPSHOT")
 }

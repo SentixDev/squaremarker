@@ -1,10 +1,6 @@
 package dev.sentix.squaremarker.forge
 
-import cloud.commandframework.CommandManager
-import cloud.commandframework.execution.CommandExecutionCoordinator
-import cloud.commandframework.neoforge.NeoForgeServerCommandManager
 import dev.sentix.squaremarker.SquareMarker
-import dev.sentix.squaremarker.command.BrigadierSetup
 import dev.sentix.squaremarker.command.Commander
 import dev.sentix.squaremarker.forge.command.ForgeCommander
 import dev.sentix.squaremarker.marker.API
@@ -15,6 +11,10 @@ import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.level.LevelEvent
 import net.neoforged.neoforge.event.server.ServerStartingEvent
 import net.neoforged.neoforge.event.server.ServerStoppedEvent
+import org.incendo.cloud.CommandManager
+import org.incendo.cloud.SenderMapper
+import org.incendo.cloud.execution.ExecutionCoordinator
+import org.incendo.cloud.neoforge.NeoForgeServerCommandManager
 import xyz.jpenilla.squaremap.api.SquaremapProvider
 import xyz.jpenilla.squaremap.api.WorldIdentifier
 import java.io.File
@@ -55,11 +55,12 @@ class SquareMarkerInitializer(
     private fun createCommandManager(): CommandManager<Commander> {
         val mgr =
             NeoForgeServerCommandManager(
-                CommandExecutionCoordinator.simpleCoordinator(),
-                { stack -> ForgeCommander.create(stack) },
-                { commander -> (commander as ForgeCommander).sender },
+                ExecutionCoordinator.simpleCoordinator(),
+                SenderMapper.create(
+                    { stack -> ForgeCommander.create(stack) },
+                    { commander -> (commander as ForgeCommander).sender },
+                ),
             )
-        BrigadierSetup.setup(mgr)
         return mgr
     }
 }

@@ -10,23 +10,23 @@ dependencies {
 
     compileOnly("io.papermc.paper:paper-api:$minecraftVersion-R0.1-SNAPSHOT")
 
-    implementation("cloud.commandframework", "cloud-paper")
+    implementation("org.incendo", "cloud-paper")
 
     implementation("org.bstats", "bstats-bukkit", bstatsVersion)
 }
 
-tasks {
-    java {
-        toolchain.languageVersion = JavaLanguageVersion.of(17)
-    }
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
 
+tasks {
     compileJava {
         options.encoding = Charsets.UTF_8.name()
-        options.release = 17
+        options.release = 21
     }
 
     compileKotlin {
-        kotlinOptions.jvmTarget = "17"
+        kotlinOptions.jvmTarget = "21"
     }
 
     jar {

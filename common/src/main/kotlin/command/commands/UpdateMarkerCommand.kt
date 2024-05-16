@@ -1,21 +1,21 @@
 package dev.sentix.squaremarker.command.commands
 
-import cloud.commandframework.arguments.standard.IntegerArgument
-import cloud.commandframework.arguments.standard.StringArgument
-import cloud.commandframework.context.CommandContext
-import cloud.commandframework.minecraft.extras.MinecraftExtrasMetaKeys
 import dev.sentix.squaremarker.Components
 import dev.sentix.squaremarker.SquareMarker
-import dev.sentix.squaremarker.command.Commander
 import dev.sentix.squaremarker.command.Commands
 import dev.sentix.squaremarker.command.PlayerCommander
 import dev.sentix.squaremarker.command.SquaremarkerCommand
 import dev.sentix.squaremarker.marker.Marker
 import dev.sentix.squaremarker.marker.MarkerService
+import org.incendo.cloud.component.DefaultValue
+import org.incendo.cloud.context.CommandContext
+import org.incendo.cloud.minecraft.extras.RichDescription.richDescription
+import org.incendo.cloud.parser.standard.IntegerParser.integerParser
+import org.incendo.cloud.parser.standard.StringParser.greedyStringParser
 import xyz.jpenilla.squaremap.api.Key
 import xyz.jpenilla.squaremap.api.SquaremapProvider
 import java.io.File
-import java.net.URL
+import java.net.URI
 import javax.imageio.ImageIO
 
 class UpdateMarkerCommand(plugin: SquareMarker, commands: Commands) :
@@ -26,17 +26,17 @@ class UpdateMarkerCommand(plugin: SquareMarker, commands: Commands) :
     override fun register() {
         commands.registerSubcommand { builder ->
             builder.literal("update")
-                .argument(IntegerArgument.builder<Commander>("id").build())
-                .argument(StringArgument.builder<Commander>("input").greedy().asOptionalWithDefault(" "))
-                .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("Update a marker to your position."))
+                .required("id", integerParser())
+                .optional("input", greedyStringParser(), DefaultValue.constant(" "))
+                .commandDescription(richDescription(Components.parse("Update a marker to your position.")))
                 .permission("squaremarker.set")
                 .senderType(PlayerCommander::class.java)
                 .handler(::execute)
         }
     }
 
-    private fun execute(context: CommandContext<Commander>) {
-        val sender = context.sender as PlayerCommander
+    private fun execute(context: CommandContext<PlayerCommander>) {
+        val sender = context.sender()
 
         val id: Int = context.get("id")
 
@@ -78,7 +78,7 @@ class UpdateMarkerCommand(plugin: SquareMarker, commands: Commands) :
                 SquaremapProvider.get().iconRegistry().register(
                     Key.key(marker.iconKey),
                     ImageIO.read(
-                        URL(marker.iconUrl),
+                        URI(marker.iconUrl).toURL(),
                     ),
                 )
             } catch (ex: Exception) {

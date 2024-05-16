@@ -23,7 +23,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("xyz.jpenilla.quiet-architectury-loom") version "1.4-SNAPSHOT"
+    id("xyz.jpenilla.quiet-architectury-loom") version "1.6-SNAPSHOT"
 }
 
 include("common")
