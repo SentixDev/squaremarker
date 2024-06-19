@@ -8,7 +8,6 @@ pluginManagement {
         maven("https://maven.fabricmc.net/")
         maven("https://maven.architectury.dev/")
         maven("https://repo.jpenilla.xyz/snapshots/")
-        mavenLocal()
     }
 }
 
@@ -19,7 +18,6 @@ dependencyResolutionManagement {
         maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") {
             mavenContent { snapshotsOnly() }
         }
-        mavenLocal()
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 }
@@ -34,8 +32,8 @@ project(":common").name = "squaremarker-common"
 include("fabric")
 project(":fabric").name = "squaremarker-fabric"
 
-//include("neoforge") ONLY TARGETING FABRIC ATM
-//project(":neoforge").name = "squaremarker-neoforge"
-//
-//include("paper")
-//project(":paper").name = "squaremarker-paper"
+include("neoforge")
+project(":neoforge").name = "squaremarker-neoforge"
+
+include("paper")
+project(":paper").name = "squaremarker-paper"
