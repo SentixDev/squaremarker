@@ -4,13 +4,14 @@ plugins {
 
 val minecraftVersion: String by rootProject
 val bstatsVersion: String by rootProject
+val cloudMinecraftModdedVersion: String by rootProject
 
 dependencies {
     implementation(project(":squaremarker-common"))
 
     compileOnly("io.papermc.paper:paper-api:$minecraftVersion-R0.1-SNAPSHOT")
 
-    implementation("org.incendo", "cloud-paper")
+    implementation("org.incendo", "cloud-paper", cloudMinecraftModdedVersion)
 
     implementation("org.bstats", "bstats-bukkit", bstatsVersion)
 }

@@ -11,7 +11,7 @@ import org.bukkit.event.world.WorldLoadEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.incendo.cloud.SenderMapper
 import org.incendo.cloud.execution.ExecutionCoordinator
-import org.incendo.cloud.paper.PaperCommandManager
+import org.incendo.cloud.paper.LegacyPaperCommandManager
 import xyz.jpenilla.squaremap.api.BukkitAdapter
 import xyz.jpenilla.squaremap.api.SquaremapProvider
 
@@ -37,20 +37,17 @@ class SquareMarkerPlugin : JavaPlugin(), Listener {
         squareMarker.shutdown()
     }
 
-    private fun createCommandManager(): PaperCommandManager<Commander> {
-        val mgr =
-            PaperCommandManager(
-                this,
-                ExecutionCoordinator.builder<Commander>()
-                    .synchronizeExecution(folia)
-                    .build(),
-                SenderMapper.create(
-                    { sender -> PaperCommander.create(sender) },
-                    { commander -> (commander as PaperCommander).sender },
-                ),
-            )
-        mgr.registerBrigadier()
-        return mgr
+    private fun createCommandManager(): LegacyPaperCommandManager<Commander> {
+        return LegacyPaperCommandManager(
+            this,
+            ExecutionCoordinator.builder<Commander>()
+                .synchronizeExecution(folia)
+                .build(),
+            SenderMapper.create(
+                { sender -> PaperCommander.create(sender) },
+                { commander -> (commander as PaperCommander).sender },
+            ),
+        )
     }
 
     @EventHandler
