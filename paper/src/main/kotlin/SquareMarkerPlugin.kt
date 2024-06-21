@@ -38,16 +38,19 @@ class SquareMarkerPlugin : JavaPlugin(), Listener {
     }
 
     private fun createCommandManager(): LegacyPaperCommandManager<Commander> {
-        return LegacyPaperCommandManager(
-            this,
-            ExecutionCoordinator.builder<Commander>()
-                .synchronizeExecution(folia)
-                .build(),
-            SenderMapper.create(
-                { sender -> PaperCommander.create(sender) },
-                { commander -> (commander as PaperCommander).sender },
-            ),
-        )
+        val mgr =
+            LegacyPaperCommandManager(
+                this,
+                ExecutionCoordinator.builder<Commander>()
+                    .synchronizeExecution(folia)
+                    .build(),
+                SenderMapper.create(
+                    { sender -> PaperCommander.create(sender) },
+                    { commander -> (commander as PaperCommander).sender },
+                ),
+            )
+        mgr.registerBrigadier()
+        return mgr
     }
 
     @EventHandler
