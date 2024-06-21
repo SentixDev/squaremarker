@@ -18,12 +18,12 @@ modId = "neoforge"
 mandatory = true
 versionRange = "[20.6,)"
 ordering = "NONE"
-side = "BOTH"
+side = "SERVER"
 
 [[dependencies.squaremarker]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.6,1.21)"
+versionRange = "[1.21]"
 ordering = "NONE"
 side = "BOTH"
 
@@ -32,11 +32,11 @@ modId = "cloud"
 mandatory = true
 versionRange = "*"
 ordering = "AFTER"
-side = "BOTH"
+side = "SERVER"
 
 [[dependencies.squaremarker]]
 modId = "squaremap"
 mandatory = true
 versionRange = "*"
 ordering = "AFTER"
-side = "BOTH"
+side = "SERVER"
