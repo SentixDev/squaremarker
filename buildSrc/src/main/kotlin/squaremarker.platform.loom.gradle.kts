@@ -25,7 +25,7 @@ tasks {
         configurations = listOf(projectImpl)
         dependencies {
             exclude {
-                it.moduleGroup == "cloud.commandframework"
+                it.moduleGroup == "org.incendo"
             }
         }
     }
