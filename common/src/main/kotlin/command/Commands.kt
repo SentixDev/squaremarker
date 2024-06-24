@@ -7,6 +7,7 @@ import dev.sentix.squaremarker.command.commands.HelpCommand
 import dev.sentix.squaremarker.command.commands.ListMarkerCommand
 import dev.sentix.squaremarker.command.commands.RemoveMarkerCommand
 import dev.sentix.squaremarker.command.commands.SetMarkerCommand
+import dev.sentix.squaremarker.command.commands.SetatMarkerCommand
 import dev.sentix.squaremarker.command.commands.ShowMarkerCommand
 import dev.sentix.squaremarker.command.commands.UpdateMarkerCommand
 import net.kyori.adventure.text.Component.text
@@ -33,6 +34,7 @@ class Commands(
             ListMarkerCommand(squareMarker, this),
             RemoveMarkerCommand(squareMarker, this),
             SetMarkerCommand(squareMarker, this),
+            SetatMarkerCommand(squareMarker, this),
             ShowMarkerCommand(squareMarker, this),
             UpdateMarkerCommand(squareMarker, this),
         ).forEach(SquaremarkerCommand::register)
