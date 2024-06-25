@@ -12,3 +12,4 @@ jobs:
     with:
       artifacts-path: "build/libs/*.jar"
       loom: true
+      jdk-version: 21

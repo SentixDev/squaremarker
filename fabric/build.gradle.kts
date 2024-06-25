@@ -4,7 +4,7 @@ plugins {
 
 val fabricApiVersion: String by rootProject
 val fabricLoaderVersion: String by rootProject
-val cloudVersion: String by rootProject
+val cloudMinecraftModdedVersion: String by rootProject
 val adventureFabricVersion: String by rootProject
 
 dependencies {
@@ -12,7 +12,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricApiVersion")
 
     // We don't include() these since squaremap already does and we depend on it
-    modImplementation("cloud.commandframework:cloud-fabric:$cloudVersion")
+    modImplementation("org.incendo:cloud-fabric:$cloudMinecraftModdedVersion")
     modImplementation("net.kyori:adventure-platform-fabric:$adventureFabricVersion")
 }
 

@@ -8,7 +8,7 @@ import xyz.jpenilla.squaremap.api.MapWorld
 import xyz.jpenilla.squaremap.api.SimpleLayerProvider
 import xyz.jpenilla.squaremap.api.SquaremapProvider
 import xyz.jpenilla.squaremap.api.WorldIdentifier
-import java.net.URL
+import java.net.URI
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledFuture
@@ -62,12 +62,12 @@ object API {
 
     private fun registerIcons() {
         SquaremapProvider.get().iconRegistry()
-            .register(markerIconKey, ImageIO.read(URL(SquareMarker.instance.config.iconUrl)))
+            .register(markerIconKey, ImageIO.read(URI.create(SquareMarker.instance.config.iconUrl).toURL()))
         for (marker in MarkerService.getMarkerList()) {
             if (marker.iconUrl.isNotBlank()) {
                 try {
                     SquaremapProvider.get().iconRegistry()
-                        .register(Key.of("squaremarker_marker_icon_${marker.id}"), ImageIO.read(URL(marker.iconUrl)))
+                        .register(Key.of("squaremarker_marker_icon_${marker.id}"), ImageIO.read(URI.create(marker.iconUrl).toURL()))
                 } catch (ex: Exception) {
                     SquareMarker.logger.warn(
                         Components.parse("${Lang.PREFIX} There is an invalid url in your marker.json. Please fix \"${marker.iconUrl}\"!"),

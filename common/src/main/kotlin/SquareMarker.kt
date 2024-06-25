@@ -1,10 +1,10 @@
 package dev.sentix.squaremarker
 
-import cloud.commandframework.CommandManager
 import dev.sentix.squaremarker.command.Commander
 import dev.sentix.squaremarker.command.Commands
 import dev.sentix.squaremarker.marker.API
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger
+import org.incendo.cloud.CommandManager
 import org.spongepowered.configurate.yaml.NodeStyle
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader
 import java.nio.file.Path

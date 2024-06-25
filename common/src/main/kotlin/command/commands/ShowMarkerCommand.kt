@@ -1,8 +1,5 @@
 package dev.sentix.squaremarker.command.commands
 
-import cloud.commandframework.arguments.standard.IntegerArgument
-import cloud.commandframework.context.CommandContext
-import cloud.commandframework.minecraft.extras.MinecraftExtrasMetaKeys
 import dev.sentix.squaremarker.Components
 import dev.sentix.squaremarker.SquareMarker
 import dev.sentix.squaremarker.command.Commander
@@ -10,6 +7,9 @@ import dev.sentix.squaremarker.command.Commands
 import dev.sentix.squaremarker.command.SquaremarkerCommand
 import dev.sentix.squaremarker.marker.Marker
 import dev.sentix.squaremarker.marker.MarkerService
+import org.incendo.cloud.context.CommandContext
+import org.incendo.cloud.minecraft.extras.RichDescription.richDescription
+import org.incendo.cloud.parser.standard.IntegerParser.integerParser
 
 class ShowMarkerCommand(plugin: SquareMarker, commands: Commands) :
     SquaremarkerCommand(
@@ -19,15 +19,15 @@ class ShowMarkerCommand(plugin: SquareMarker, commands: Commands) :
     override fun register() {
         commands.registerSubcommand { builder ->
             builder.literal("show")
-                .argument(IntegerArgument.builder("id"))
-                .meta(MinecraftExtrasMetaKeys.DESCRIPTION, Components.parse("Show a marker by id."))
+                .required("id", integerParser())
+                .commandDescription(richDescription(Components.parse("Show a marker by id.")))
                 .permission("squaremarker.show")
                 .handler(::execute)
         }
     }
 
     private fun execute(context: CommandContext<Commander>) {
-        val sender = context.sender
+        val sender = context.sender()
 
         val id: Int = context.get("id")
 

@@ -1,8 +1,6 @@
 package dev.sentix.squaremarker.paper
 
-import cloud.commandframework.paper.PaperCommandManager
 import dev.sentix.squaremarker.SquareMarker
-import dev.sentix.squaremarker.command.BrigadierSetup
 import dev.sentix.squaremarker.command.Commander
 import dev.sentix.squaremarker.marker.API
 import dev.sentix.squaremarker.paper.command.PaperCommander
@@ -11,6 +9,9 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.world.WorldLoadEvent
 import org.bukkit.plugin.java.JavaPlugin
+import org.incendo.cloud.SenderMapper
+import org.incendo.cloud.execution.ExecutionCoordinator
+import org.incendo.cloud.paper.LegacyPaperCommandManager
 import xyz.jpenilla.squaremap.api.BukkitAdapter
 import xyz.jpenilla.squaremap.api.SquaremapProvider
 
@@ -36,17 +37,19 @@ class SquareMarkerPlugin : JavaPlugin(), Listener {
         squareMarker.shutdown()
     }
 
-    private fun createCommandManager(): PaperCommandManager<Commander> {
+    private fun createCommandManager(): LegacyPaperCommandManager<Commander> {
         val mgr =
-            PaperCommandManager(
+            LegacyPaperCommandManager(
                 this,
-                ExecutionCoordinator.synchronizedOnFolia<Commander>(),
-                { sender -> PaperCommander.create(sender) },
-                { commander -> (commander as PaperCommander).sender },
+                ExecutionCoordinator.builder<Commander>()
+                    .synchronizeExecution(folia)
+                    .build(),
+                SenderMapper.create(
+                    { sender -> PaperCommander.create(sender) },
+                    { commander -> (commander as PaperCommander).sender },
+                ),
             )
-        mgr.registerAsynchronousCompletions()
         mgr.registerBrigadier()
-        BrigadierSetup.setup(mgr)
         return mgr
     }
 

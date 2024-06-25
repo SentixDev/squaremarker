@@ -1,6 +1,6 @@
 plugins {
     id("squaremarker.base")
-    id("com.github.johnrengelman.shadow")
+    id("io.github.goooler.shadow")
 }
 
 val platform = extensions.create("squareMarker", SquareMarkerPlatformExtension::class)

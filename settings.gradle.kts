@@ -23,7 +23,8 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("xyz.jpenilla.quiet-architectury-loom") version "1.4-SNAPSHOT"
+    id("xyz.jpenilla.quiet-architectury-loom") version "1.6-SNAPSHOT"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
 include("common")
