@@ -2,6 +2,7 @@ package dev.sentix.squaremarker
 
 import dev.sentix.squaremarker.command.Commander
 import dev.sentix.squaremarker.command.Commands
+import dev.sentix.squaremarker.command.ParserFactory
 import dev.sentix.squaremarker.marker.API
 import org.incendo.cloud.CommandManager
 import org.slf4j.Logger
@@ -12,6 +13,7 @@ import java.nio.file.Path
 
 class SquareMarker(
     commandManager: CommandManager<Commander>,
+    parserFactory: ParserFactory,
     private val configFile: Path,
     dataDir: Path,
     val worldIdentifierSerializer: Any = WorldIdentifierSerializer,
@@ -27,7 +29,7 @@ class SquareMarker(
     init {
         instance = this
 
-        Commands(this, commandManager).registerCommands()
+        Commands(this, commandManager, parserFactory).registerCommands()
     }
 
     fun init() {

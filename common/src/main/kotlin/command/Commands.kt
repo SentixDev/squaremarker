@@ -22,6 +22,7 @@ import org.incendo.cloud.util.TypeUtils
 class Commands(
     private val squareMarker: SquareMarker,
     val commandManager: CommandManager<Commander>,
+    val parserFactory: ParserFactory,
 ) {
     init {
         registerExceptionHandlers()

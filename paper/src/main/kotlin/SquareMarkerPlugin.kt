@@ -4,6 +4,7 @@ import dev.sentix.squaremarker.SquareMarker
 import dev.sentix.squaremarker.command.Commander
 import dev.sentix.squaremarker.marker.API
 import dev.sentix.squaremarker.paper.command.PaperCommander
+import dev.sentix.squaremarker.paper.command.PaperParserFactory
 import org.bstats.bukkit.Metrics
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -22,6 +23,7 @@ class SquareMarkerPlugin : JavaPlugin(), Listener {
         squareMarker =
             SquareMarker(
                 createCommandManager(),
+                PaperParserFactory,
                 dataFolder.toPath().resolve("config.yml"),
                 dataFolder.toPath(),
                 PaperWorldIdentifierSerializer(server),

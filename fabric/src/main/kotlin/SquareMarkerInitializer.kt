@@ -3,6 +3,7 @@ package dev.sentix.squaremarker.fabric
 import dev.sentix.squaremarker.SquareMarker
 import dev.sentix.squaremarker.command.Commander
 import dev.sentix.squaremarker.fabric.command.FabricCommander
+import dev.sentix.squaremarker.fabric.command.FabricParserFactory
 import dev.sentix.squaremarker.marker.API
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.Event
@@ -26,6 +27,7 @@ class SquareMarkerInitializer : ModInitializer {
     private val squareMarker: SquareMarker =
         SquareMarker(
             createCommandManager(),
+            FabricParserFactory,
             FabricLoader.getInstance().configDir.resolve("${modContainer.metadata.id}.yml"),
             FabricLoader.getInstance().gameDir.resolve(modContainer.metadata.id),
         )

@@ -3,6 +3,7 @@ package dev.sentix.squaremarker.forge
 import dev.sentix.squaremarker.SquareMarker
 import dev.sentix.squaremarker.command.Commander
 import dev.sentix.squaremarker.forge.command.ForgeCommander
+import dev.sentix.squaremarker.forge.command.ForgeParserFactory
 import dev.sentix.squaremarker.marker.API
 import net.minecraft.server.level.ServerLevel
 import net.neoforged.fml.ModContainer
@@ -28,6 +29,7 @@ class SquareMarkerInitializer(
     private val squareMarker: SquareMarker =
         SquareMarker(
             createCommandManager(),
+            ForgeParserFactory,
             dir.resolve("config.yml"),
             dir,
         )
