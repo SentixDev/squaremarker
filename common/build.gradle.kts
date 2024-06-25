@@ -22,7 +22,14 @@ dependencies {
     api("org.incendo", "cloud-kotlin-extensions")
     compileOnly("com.google.code.gson", "gson", gsonVersion)
     compileOnly("net.kyori", "adventure-text-minimessage", adventureVersion)
-    compileOnly("net.kyori", "adventure-text-logger-slf4j", adventureVersion)
+
+    // Temp fix for longstanding neoforge incompatibility
+    api("net.kyori", "adventure-text-logger-slf4j", adventureVersion) {
+        exclude("net.kyori")
+        exclude("org.slf4j")
+    }
+    compileOnly("org.slf4j", "slf4j-api", "1.7.36")
+
     api(platform("org.spongepowered:configurate-bom:$configurateVersion"))
     api("org.spongepowered:configurate-yaml")
 }
