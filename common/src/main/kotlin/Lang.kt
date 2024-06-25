@@ -1,6 +1,7 @@
 package dev.sentix.squaremarker
 
 object Lang {
+    const val PLAIN_PREFIX = "[squaremarker]"
     const val PREFIX = "<gray>[<gradient:#C028FF:#5B00FF>squaremarker</gradient>]</gray>"
 
     const val NO_PERMISSION = "<red>Not authorized.</red>"

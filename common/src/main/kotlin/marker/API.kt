@@ -1,6 +1,5 @@
 package dev.sentix.squaremarker.marker
 
-import dev.sentix.squaremarker.Components
 import dev.sentix.squaremarker.Lang
 import dev.sentix.squaremarker.SquareMarker
 import xyz.jpenilla.squaremap.api.Key
@@ -70,7 +69,7 @@ object API {
                         .register(Key.of("squaremarker_marker_icon_${marker.id}"), ImageIO.read(URI.create(marker.iconUrl).toURL()))
                 } catch (ex: Exception) {
                     SquareMarker.logger.warn(
-                        Components.parse("${Lang.PREFIX} There is an invalid url in your marker.json. Please fix \"${marker.iconUrl}\"!"),
+                        "${Lang.PLAIN_PREFIX} There is an invalid url in your marker.json. Please fix \"${marker.iconUrl}\"!",
                         ex,
                     )
                 }

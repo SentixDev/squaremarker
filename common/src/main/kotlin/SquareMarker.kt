@@ -3,8 +3,9 @@ package dev.sentix.squaremarker
 import dev.sentix.squaremarker.command.Commander
 import dev.sentix.squaremarker.command.Commands
 import dev.sentix.squaremarker.marker.API
-import net.kyori.adventure.text.logger.slf4j.ComponentLogger
 import org.incendo.cloud.CommandManager
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.spongepowered.configurate.yaml.NodeStyle
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader
 import java.nio.file.Path
@@ -16,7 +17,7 @@ class SquareMarker(
     val worldIdentifierSerializer: Any = WorldIdentifierSerializer,
 ) {
     companion object {
-        val logger: ComponentLogger = ComponentLogger.logger(SquareMarker::class.java)
+        val logger: Logger = LoggerFactory.getLogger(SquareMarker::class.java)
         lateinit var instance: SquareMarker
     }
 
