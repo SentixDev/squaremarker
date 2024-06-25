@@ -36,7 +36,7 @@ class SquareMarkerInitializer : ModInitializer {
         ServerLifecycleEvents.SERVER_STOPPED.register { squareMarker.shutdown() }
 
         // Use custom late phase as workaround for squaremap <1.1.7
-        val late = ResourceLocation("squaremarker:late")
+        val late = ResourceLocation.parse("squaremarker:late")
         ServerWorldEvents.LOAD.register(late) { _, world ->
             SquaremapProvider.get().getWorldIfEnabled(
                 WorldIdentifier.parse(world.dimension().location().toString()),

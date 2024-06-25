@@ -15,5 +15,5 @@ dependencies {
 }
 
 squareMarker {
-    modInfoFilePath = "META-INF/mods.toml"
+    modInfoFilePath = "META-INF/neoforge.mods.toml"
 }
