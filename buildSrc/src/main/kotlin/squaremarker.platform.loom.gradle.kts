@@ -1,7 +1,7 @@
 plugins {
     id("squaremarker.platform")
     id("xyz.jpenilla.quiet-architectury-loom")
-    id("io.github.goooler.shadow")
+    id("com.gradleup.shadow")
 }
 
 val minecraftVersion: String by rootProject

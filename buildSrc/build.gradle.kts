@@ -13,8 +13,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.20")
     implementation("org.jlleitschuh.gradle:ktlint-gradle:12.0.2")
-    implementation("io.github.goooler.shadow:shadow-gradle-plugin:8.1.7")
-    implementation("xyz.jpenilla:quiet-architectury-loom:1.6-SNAPSHOT")
+    implementation("com.gradleup.shadow:shadow-gradle-plugin:8.3.0")
+    implementation("xyz.jpenilla:quiet-architectury-loom:1.7-SNAPSHOT")
 }

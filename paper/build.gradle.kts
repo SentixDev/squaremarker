@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("squaremarker.platform")
 }
@@ -19,14 +21,16 @@ java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_21
+    }
+}
+
 tasks {
     compileJava {
         options.encoding = Charsets.UTF_8.name()
         options.release = 21
-    }
-
-    compileKotlin {
-        kotlinOptions.jvmTarget = "21"
     }
 
     jar {
@@ -36,7 +40,7 @@ tasks {
     shadowJar {
         archiveClassifier = null as String?
         listOf(
-            "cloud.commandframework",
+            "org.incendo",
         ).forEach { relocate(it, "${rootProject.group}.lib.$it") }
         dependencies {
             exclude(dependency("org.jetbrains:annotations"))
