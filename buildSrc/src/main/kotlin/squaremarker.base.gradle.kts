@@ -1,6 +1,6 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.jvm.toolchain.JavaLanguageVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     base
@@ -9,11 +9,13 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint")
 }
 
-tasks {
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "21"
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_21
     }
+}
 
+tasks {
     withType<ShadowJar> {
         listOf(
             "kotlin",
