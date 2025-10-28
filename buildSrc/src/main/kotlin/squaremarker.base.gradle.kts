@@ -23,6 +23,7 @@ tasks {
             "io.leangen.geantyref",
             "org.spongepowered.configurate",
             "org.yaml.snakeyaml",
+            "net.kyori.option"
         ).forEach { relocate(it, "${rootProject.group}.lib.$it") }
         dependencies {
             exclude(dependency("org.jetbrains:annotations"))

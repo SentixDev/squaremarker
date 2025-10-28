@@ -15,6 +15,6 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.20")
     implementation("org.jlleitschuh.gradle:ktlint-gradle:12.0.2")
-    implementation("com.gradleup.shadow:shadow-gradle-plugin:8.3.0")
-    implementation("xyz.jpenilla:quiet-architectury-loom:1.7-SNAPSHOT")
+    implementation("com.gradleup.shadow:com.gradleup.shadow.gradle.plugin:9.2.2")
+    implementation("quiet-fabric-loom:quiet-fabric-loom.gradle.plugin:1.11-SNAPSHOT")
 }
