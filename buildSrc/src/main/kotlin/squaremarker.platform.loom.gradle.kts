@@ -1,6 +1,6 @@
 plugins {
     id("squaremarker.platform")
-    id("fabric-loom")
+    id("net.fabricmc.fabric-loom-remap")
     id("com.gradleup.shadow")
 }
 
