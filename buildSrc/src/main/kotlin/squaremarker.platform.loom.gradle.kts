@@ -1,6 +1,6 @@
 plugins {
     id("squaremarker.platform")
-    id("quiet-fabric-loom")
+    id("fabric-loom")
     id("com.gradleup.shadow")
 }
 
