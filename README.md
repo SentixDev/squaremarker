@@ -57,3 +57,25 @@ update-rate-milliseconds: 5000
 ***Of course, you can also use HTML tags in the content to customize the marker tooltips.***
 
 **Old marker files of the "Pl3xMap-Marker" addon are not compatible with this plugin.** 
+
+# Development
+
+## How to Build
+
+### Required Tools
+
+OpenJDK-Devel
+
+### To Build
+
+#### Linux
+
+```
+./gradlew build
+```bash
+
+#### Windows
+
+```
+gradlew.bat build
+```cmd
