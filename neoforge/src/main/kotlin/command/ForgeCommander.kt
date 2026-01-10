@@ -14,7 +14,7 @@ open class ForgeCommander(val sender: CommandSourceStack) : Commander, Forwardin
 
     class Player(sender: CommandSourceStack, private val player: ServerPlayer) : ForgeCommander(sender), PlayerCommander {
         override val world: WorldIdentifier
-            get() = WorldIdentifier.parse(player.level().dimension().location().toString())
+            get() = WorldIdentifier.parse(player.level().dimension().identifier().toString())
         override val x: Double
             get() = player.x
         override val y: Double
