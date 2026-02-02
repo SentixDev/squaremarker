@@ -7,6 +7,7 @@ val adventureVersion: String by rootProject
 val forgeVersion: String by rootProject
 val cloudMinecraftModdedVersion: String by rootProject
 val adventureFabricVersion: String by rootProject
+val minecraftVersion: String by rootProject
 
 neoForge {
     version = forgeVersion
@@ -25,6 +26,7 @@ tasks {
                 it.moduleGroup == "org.incendo"
             }
         }
+        archiveFileName.set("${project.name}-mc$minecraftVersion-${project.version}.jar")
     }
 }
 
