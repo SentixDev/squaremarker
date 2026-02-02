@@ -17,14 +17,17 @@ import java.net.URI
 import javax.imageio.ImageIO
 import kotlin.random.Random.Default.nextInt
 
-class SetMarkerCommand(plugin: SquareMarker, commands: Commands) :
-    SquaremarkerCommand(
+class SetMarkerCommand(
+    plugin: SquareMarker,
+    commands: Commands,
+) : SquaremarkerCommand(
         plugin,
         commands,
     ) {
     override fun register() {
         commands.registerSubcommand { builder ->
-            builder.literal("set")
+            builder
+                .literal("set")
                 .optional("input", greedyStringParser(), DefaultValue.constant(" "))
                 .commandDescription(richDescription(Components.parse("Set a marker at your position.")))
                 .permission("squaremarker.set")

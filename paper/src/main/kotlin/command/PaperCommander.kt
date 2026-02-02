@@ -8,10 +8,16 @@ import org.bukkit.command.CommandSender
 import xyz.jpenilla.squaremap.api.BukkitAdapter
 import xyz.jpenilla.squaremap.api.WorldIdentifier
 
-open class PaperCommander(val sender: CommandSender) : Commander, ForwardingAudience.Single {
+open class PaperCommander(
+    val sender: CommandSender,
+) : Commander,
+    ForwardingAudience.Single {
     override fun audience(): Audience = sender
 
-    class Player(private val player: org.bukkit.entity.Player) : PaperCommander(player), PlayerCommander {
+    class Player(
+        private val player: org.bukkit.entity.Player,
+    ) : PaperCommander(player),
+        PlayerCommander {
         override val world: WorldIdentifier
             get() = BukkitAdapter.worldIdentifier(player.world)
         override val x: Double

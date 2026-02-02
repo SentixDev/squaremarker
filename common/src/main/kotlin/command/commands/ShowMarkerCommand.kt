@@ -11,14 +11,17 @@ import org.incendo.cloud.context.CommandContext
 import org.incendo.cloud.minecraft.extras.RichDescription.richDescription
 import org.incendo.cloud.parser.standard.IntegerParser.integerParser
 
-class ShowMarkerCommand(plugin: SquareMarker, commands: Commands) :
-    SquaremarkerCommand(
+class ShowMarkerCommand(
+    plugin: SquareMarker,
+    commands: Commands,
+) : SquaremarkerCommand(
         plugin,
         commands,
     ) {
     override fun register() {
         commands.registerSubcommand { builder ->
-            builder.literal("show")
+            builder
+                .literal("show")
                 .required("id", integerParser())
                 .commandDescription(richDescription(Components.parse("Show a marker by id.")))
                 .permission("squaremarker.show")

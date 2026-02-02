@@ -15,7 +15,9 @@ import org.incendo.cloud.paper.LegacyPaperCommandManager
 import xyz.jpenilla.squaremap.api.BukkitAdapter
 import xyz.jpenilla.squaremap.api.SquaremapProvider
 
-class SquareMarkerPlugin : JavaPlugin(), Listener {
+class SquareMarkerPlugin :
+    JavaPlugin(),
+    Listener {
     private lateinit var squareMarker: SquareMarker
 
     override fun onEnable() {
@@ -41,7 +43,8 @@ class SquareMarkerPlugin : JavaPlugin(), Listener {
         val mgr =
             LegacyPaperCommandManager(
                 this,
-                ExecutionCoordinator.builder<Commander>()
+                ExecutionCoordinator
+                    .builder<Commander>()
                     .synchronizeExecution(folia)
                     .build(),
                 SenderMapper.create(

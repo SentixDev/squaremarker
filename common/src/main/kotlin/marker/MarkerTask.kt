@@ -9,7 +9,10 @@ import xyz.jpenilla.squaremap.api.marker.Icon
 import xyz.jpenilla.squaremap.api.marker.Marker
 import xyz.jpenilla.squaremap.api.marker.MarkerOptions
 
-class MarkerTask(world: MapWorld, provider: SimpleLayerProvider) : Runnable {
+class MarkerTask(
+    world: MapWorld,
+    provider: SimpleLayerProvider,
+) : Runnable {
     private val world: MapWorld
     private val provider: SimpleLayerProvider
     private var stop = false
@@ -49,7 +52,8 @@ class MarkerTask(world: MapWorld, provider: SimpleLayerProvider) : Runnable {
         val icon: Icon = Marker.icon(Point.point(x, z), iconKey, SquareMarker.instance.config.iconSize)
         if (name.isNotBlank()) {
             icon.markerOptions(
-                MarkerOptions.builder()
+                MarkerOptions
+                    .builder()
                     .hoverTooltip(
                         "<center>$name</center>",
                     ),

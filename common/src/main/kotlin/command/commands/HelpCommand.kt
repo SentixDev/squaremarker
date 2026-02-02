@@ -16,8 +16,10 @@ import org.incendo.cloud.parser.standard.StringParser.greedyStringParser
 import org.incendo.cloud.suggestion.Suggestion.suggestion
 import org.incendo.cloud.suggestion.SuggestionProvider
 
-class HelpCommand(plugin: SquareMarker, commands: Commands) :
-    SquaremarkerCommand(
+class HelpCommand(
+    plugin: SquareMarker,
+    commands: Commands,
+) : SquaremarkerCommand(
         plugin,
         commands,
     ) {
@@ -25,21 +27,24 @@ class HelpCommand(plugin: SquareMarker, commands: Commands) :
 
     override fun register() {
         val helpQueryArgument =
-            CommandComponent.builder<Commander, String>("query", greedyStringParser())
+            CommandComponent
+                .builder<Commander, String>("query", greedyStringParser())
                 .suggestionProvider(
                     SuggestionProvider.blocking { context, _ ->
-                        commands.commandManager.createHelpHandler().queryRootIndex(context.sender())
+                        commands.commandManager
+                            .createHelpHandler()
+                            .queryRootIndex(context.sender())
                             .entries()
                             .map { it.syntax() }
                             .map { suggestion(it) }
                             .toList()
                     },
-                )
-                .optional()
+                ).optional()
                 .build()
 
         commands.registerSubcommand { builder ->
-            builder.literal("help")
+            builder
+                .literal("help")
                 .argument(helpQueryArgument)
                 .commandDescription(richDescription(Components.parse("Show marker help.")))
                 .permission("squaremarker.help")
@@ -51,8 +56,9 @@ class HelpCommand(plugin: SquareMarker, commands: Commands) :
         help.queryCommands(context.getOrDefault("query", ""), context.sender())
     }
 
-    private fun createHelp(): MinecraftHelp<Commander> {
-        return MinecraftHelp.builder<Commander>()
+    private fun createHelp(): MinecraftHelp<Commander> =
+        MinecraftHelp
+            .builder<Commander>()
             .commandManager(commands.commandManager)
             .audienceProvider(AudienceProvider.nativeAudience())
             .commandPrefix("/${squareMarker.config.commandLabel} help")
@@ -64,8 +70,6 @@ class HelpCommand(plugin: SquareMarker, commands: Commands) :
                     NamedTextColor.GRAY,
                     NamedTextColor.DARK_GRAY,
                 ),
-            )
-            .messages(MinecraftHelp.MESSAGE_HELP_TITLE, "squaremarker command help")
+            ).messages(MinecraftHelp.MESSAGE_HELP_TITLE, "squaremarker command help")
             .build()
-    }
 }

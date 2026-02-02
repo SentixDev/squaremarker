@@ -39,16 +39,20 @@ class SquareMarkerInitializer(
 
         NeoForge.EVENT_BUS.addListener<LevelEvent.Load> {
             val level = it.level as? ServerLevel ?: return@addListener
-            SquaremapProvider.get().getWorldIfEnabled(
-                WorldIdentifier.parse(level.dimension().location().toString()),
-            ).ifPresent(API::initWorld)
+            SquaremapProvider
+                .get()
+                .getWorldIfEnabled(
+                    WorldIdentifier.parse(level.dimension().location().toString()),
+                ).ifPresent(API::initWorld)
         }
 
         NeoForge.EVENT_BUS.addListener<LevelEvent.Unload> {
             val level = it.level as? ServerLevel ?: return@addListener
-            SquaremapProvider.get().getWorldIfEnabled(
-                WorldIdentifier.parse(level.dimension().location().toString()),
-            ).ifPresent(API::unloadWorld)
+            SquaremapProvider
+                .get()
+                .getWorldIfEnabled(
+                    WorldIdentifier.parse(level.dimension().location().toString()),
+                ).ifPresent(API::unloadWorld)
         }
     }
 

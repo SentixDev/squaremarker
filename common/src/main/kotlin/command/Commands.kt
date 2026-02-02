@@ -39,7 +39,8 @@ class Commands(
     }
 
     private fun registerExceptionHandlers() {
-        MinecraftExceptionHandler.createNative<Commander>()
+        MinecraftExceptionHandler
+            .createNative<Commander>()
             .defaultArgumentParsingHandler()
             .defaultInvalidSenderHandler()
             .defaultCommandExecutionHandler()
@@ -55,8 +56,7 @@ class Commands(
                     .append(text(requiredTypeDisplayName, NamedTextColor.GRAY))
                     .append(text('!'))
                     .build()
-            }
-            .handler(NoPermissionException::class.java) { _, _ -> Components.parse(Lang.NO_PERMISSION) }
+            }.handler(NoPermissionException::class.java) { _, _ -> Components.parse(Lang.NO_PERMISSION) }
             .decorator { c -> Components.parse(Lang.HELP).append(c) }
             .registerTo(commandManager)
     }

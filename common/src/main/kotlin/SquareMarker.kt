@@ -42,7 +42,8 @@ class SquareMarker(
 
     private fun loadConfiguration(): Configuration {
         val loader =
-            YamlConfigurationLoader.builder()
+            YamlConfigurationLoader
+                .builder()
                 .path(configFile)
                 .nodeStyle(NodeStyle.BLOCK)
                 .build()

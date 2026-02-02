@@ -18,14 +18,17 @@ import java.io.File
 import java.net.URI
 import javax.imageio.ImageIO
 
-class UpdateMarkerCommand(plugin: SquareMarker, commands: Commands) :
-    SquaremarkerCommand(
+class UpdateMarkerCommand(
+    plugin: SquareMarker,
+    commands: Commands,
+) : SquaremarkerCommand(
         plugin,
         commands,
     ) {
     override fun register() {
         commands.registerSubcommand { builder ->
-            builder.literal("update")
+            builder
+                .literal("update")
                 .required("id", integerParser())
                 .optional("input", greedyStringParser(), DefaultValue.constant(" "))
                 .commandDescription(richDescription(Components.parse("Update a marker to your position.")))

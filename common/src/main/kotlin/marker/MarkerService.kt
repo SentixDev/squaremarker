@@ -9,18 +9,15 @@ object MarkerService {
         return IO.gson.fromJson(IO.read(), type)
     }
 
-    fun getMarker(id: Int): Marker {
-        return getMarkerList().filter { it.id == id }[0]
-    }
+    fun getMarker(id: Int): Marker = getMarkerList().filter { it.id == id }[0]
 
-    fun markerExist(id: Int): Boolean {
-        return try {
+    fun markerExist(id: Int): Boolean =
+        try {
             getMarker(id)
             true
         } catch (_: IndexOutOfBoundsException) {
             false
         }
-    }
 
     fun addMarker(marker: Marker) {
         val markerList = getMarkerList()

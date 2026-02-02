@@ -16,7 +16,8 @@ object IO {
             .create()
 
     private val gsonPrettier: Gson =
-        gson.newBuilder()
+        gson
+            .newBuilder()
             .setPrettyPrinting()
             .create()
 
@@ -36,7 +37,5 @@ object IO {
         markerFile.bufferedWriter().use { it.write(gsonPrettier.toJson(input)) }
     }
 
-    fun read(): String {
-        return markerFile.bufferedReader().use { it.readText() }
-    }
+    fun read(): String = markerFile.bufferedReader().use { it.readText() }
 }

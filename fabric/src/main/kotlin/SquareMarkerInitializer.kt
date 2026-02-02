@@ -38,16 +38,20 @@ class SquareMarkerInitializer : ModInitializer {
         // Use custom late phase as workaround for squaremap <1.1.7
         val late = ResourceLocation.parse("squaremarker:late")
         ServerWorldEvents.LOAD.register(late) { _, world ->
-            SquaremapProvider.get().getWorldIfEnabled(
-                WorldIdentifier.parse(world.dimension().location().toString()),
-            ).ifPresent(API::initWorld)
+            SquaremapProvider
+                .get()
+                .getWorldIfEnabled(
+                    WorldIdentifier.parse(world.dimension().location().toString()),
+                ).ifPresent(API::initWorld)
         }
         ServerWorldEvents.LOAD.addPhaseOrdering(Event.DEFAULT_PHASE, late)
 
         ServerWorldEvents.UNLOAD.register { _, world ->
-            SquaremapProvider.get().getWorldIfEnabled(
-                WorldIdentifier.parse(world.dimension().location().toString()),
-            ).ifPresent(API::unloadWorld)
+            SquaremapProvider
+                .get()
+                .getWorldIfEnabled(
+                    WorldIdentifier.parse(world.dimension().location().toString()),
+                ).ifPresent(API::unloadWorld)
         }
     }
 

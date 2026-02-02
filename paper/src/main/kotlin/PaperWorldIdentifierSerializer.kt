@@ -14,8 +14,9 @@ import xyz.jpenilla.squaremap.api.BukkitAdapter
 import xyz.jpenilla.squaremap.api.WorldIdentifier
 import java.lang.reflect.Type
 
-class PaperWorldIdentifierSerializer(private val server: Server) :
-    JsonSerializer<WorldIdentifier>,
+class PaperWorldIdentifierSerializer(
+    private val server: Server,
+) : JsonSerializer<WorldIdentifier>,
     JsonDeserializer<WorldIdentifier> {
     override fun serialize(
         src: WorldIdentifier?,

@@ -11,14 +11,17 @@ import dev.sentix.squaremarker.marker.MarkerService
 import org.incendo.cloud.context.CommandContext
 import org.incendo.cloud.minecraft.extras.RichDescription.richDescription
 
-class ListMarkerCommand(plugin: SquareMarker, commands: Commands) :
-    SquaremarkerCommand(
+class ListMarkerCommand(
+    plugin: SquareMarker,
+    commands: Commands,
+) : SquaremarkerCommand(
         plugin,
         commands,
     ) {
     override fun register() {
         commands.registerSubcommand { builder ->
-            builder.literal("list")
+            builder
+                .literal("list")
                 .commandDescription(richDescription(Components.parse("List all markers.")))
                 .permission("squaremarker.list")
                 .handler(::execute)

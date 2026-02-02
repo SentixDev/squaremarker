@@ -9,12 +9,26 @@ import net.minecraft.commands.CommandSourceStack
 import net.minecraft.server.level.ServerPlayer
 import xyz.jpenilla.squaremap.api.WorldIdentifier
 
-open class ForgeCommander(val sender: CommandSourceStack) : Commander, ForwardingAudience.Single {
+open class ForgeCommander(
+    val sender: CommandSourceStack,
+) : Commander,
+    ForwardingAudience.Single {
     override fun audience(): Audience = MinecraftServerAudiences.of(sender.server).audience(sender)
 
-    class Player(sender: CommandSourceStack, private val player: ServerPlayer) : ForgeCommander(sender), PlayerCommander {
+    class Player(
+        sender: CommandSourceStack,
+        private val player: ServerPlayer,
+    ) : ForgeCommander(sender),
+        PlayerCommander {
         override val world: WorldIdentifier
-            get() = WorldIdentifier.parse(player.level().dimension().location().toString())
+            get() =
+                WorldIdentifier.parse(
+                    player
+                        .level()
+                        .dimension()
+                        .location()
+                        .toString(),
+                )
         override val x: Double
             get() = player.x
         override val y: Double

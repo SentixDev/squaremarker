@@ -39,10 +39,12 @@ object API {
         }
 
         val provider: SimpleLayerProvider =
-            SimpleLayerProvider.builder(SquareMarker.instance.config.layerName).apply {
-                defaultHidden(SquareMarker.instance.config.defaultHidden)
-                showControls(SquareMarker.instance.config.showControls)
-            }.build()
+            SimpleLayerProvider
+                .builder(SquareMarker.instance.config.layerName)
+                .apply {
+                    defaultHidden(SquareMarker.instance.config.defaultHidden)
+                    showControls(SquareMarker.instance.config.showControls)
+                }.build()
         val key = Key.of("squaremarker_marker")
         if (mapWorld.layerRegistry().hasEntry(key)) {
             mapWorld.layerRegistry().unregister(key)
@@ -60,12 +62,16 @@ object API {
     }
 
     private fun registerIcons() {
-        SquaremapProvider.get().iconRegistry()
+        SquaremapProvider
+            .get()
+            .iconRegistry()
             .register(markerIconKey, ImageIO.read(URI.create(SquareMarker.instance.config.iconUrl).toURL()))
         for (marker in MarkerService.getMarkerList()) {
             if (marker.iconUrl.isNotBlank()) {
                 try {
-                    SquaremapProvider.get().iconRegistry()
+                    SquaremapProvider
+                        .get()
+                        .iconRegistry()
                         .register(Key.of("squaremarker_marker_icon_${marker.id}"), ImageIO.read(URI.create(marker.iconUrl).toURL()))
                 } catch (ex: Exception) {
                     SquareMarker.logger.warn(

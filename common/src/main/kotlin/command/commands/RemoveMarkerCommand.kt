@@ -10,14 +10,17 @@ import org.incendo.cloud.context.CommandContext
 import org.incendo.cloud.minecraft.extras.RichDescription.richDescription
 import org.incendo.cloud.parser.standard.IntegerParser.integerParser
 
-class RemoveMarkerCommand(plugin: SquareMarker, commands: Commands) :
-    SquaremarkerCommand(
+class RemoveMarkerCommand(
+    plugin: SquareMarker,
+    commands: Commands,
+) : SquaremarkerCommand(
         plugin,
         commands,
     ) {
     override fun register() {
         commands.registerSubcommand { builder ->
-            builder.literal("remove")
+            builder
+                .literal("remove")
                 .required("id", integerParser())
                 .commandDescription(richDescription(Components.parse("Remove a marker by id.")))
                 .permission("squaremarker.remove")
