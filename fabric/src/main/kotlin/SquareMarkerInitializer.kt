@@ -10,7 +10,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.ModContainer
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import org.incendo.cloud.CommandManager
 import org.incendo.cloud.SenderMapper
 import org.incendo.cloud.execution.ExecutionCoordinator
@@ -36,12 +36,12 @@ class SquareMarkerInitializer : ModInitializer {
         ServerLifecycleEvents.SERVER_STOPPED.register { squareMarker.shutdown() }
 
         // Use custom late phase as workaround for squaremap <1.1.7
-        val late = ResourceLocation.parse("squaremarker:late")
+        val late = Identifier.parse("squaremarker:late")
         ServerWorldEvents.LOAD.register(late) { _, world ->
             SquaremapProvider
                 .get()
                 .getWorldIfEnabled(
-                    WorldIdentifier.parse(world.dimension().location().toString()),
+                    WorldIdentifier.parse(world.dimension().identifier().toString()),
                 ).ifPresent(API::initWorld)
         }
         ServerWorldEvents.LOAD.addPhaseOrdering(Event.DEFAULT_PHASE, late)
@@ -50,7 +50,7 @@ class SquareMarkerInitializer : ModInitializer {
             SquaremapProvider
                 .get()
                 .getWorldIfEnabled(
-                    WorldIdentifier.parse(world.dimension().location().toString()),
+                    WorldIdentifier.parse(world.dimension().identifier().toString()),
                 ).ifPresent(API::unloadWorld)
         }
     }

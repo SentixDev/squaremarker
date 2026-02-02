@@ -42,7 +42,7 @@ class SquareMarkerInitializer(
             SquaremapProvider
                 .get()
                 .getWorldIfEnabled(
-                    WorldIdentifier.parse(level.dimension().location().toString()),
+                    WorldIdentifier.parse(level.dimension().identifier().toString()),
                 ).ifPresent(API::initWorld)
         }
 
@@ -51,7 +51,7 @@ class SquareMarkerInitializer(
             SquaremapProvider
                 .get()
                 .getWorldIfEnabled(
-                    WorldIdentifier.parse(level.dimension().location().toString()),
+                    WorldIdentifier.parse(level.dimension().identifier().toString()),
                 ).ifPresent(API::unloadWorld)
         }
     }

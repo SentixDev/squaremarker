@@ -25,7 +25,7 @@ open class FabricCommander(
                     player
                         .level()
                         .dimension()
-                        .location()
+                        .identifier()
                         .toString(),
                 )
         override val x: Double

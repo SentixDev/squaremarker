@@ -26,7 +26,7 @@ open class ForgeCommander(
                     player
                         .level()
                         .dimension()
-                        .location()
+                        .identifier()
                         .toString(),
                 )
         override val x: Double
