@@ -43,7 +43,11 @@ class RemoveMarkerCommand(
         val marker = MarkerService.getMarker(id)
 
         if (marker.iconUrl.isNotBlank()) {
-            SquaremapProvider.get().iconRegistry().unregister(Key.of(marker.iconKey))
+            try {
+                SquaremapProvider.get().iconRegistry().unregister(Key.of(marker.iconKey))
+            } catch (_: Exception) {
+                // Icon may not have been registered (e.g. image failed to load), safe to ignore.
+            }
         }
 
         MarkerService.removeMarker(id)
