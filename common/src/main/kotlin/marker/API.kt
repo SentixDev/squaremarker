@@ -7,12 +7,10 @@ import xyz.jpenilla.squaremap.api.MapWorld
 import xyz.jpenilla.squaremap.api.SimpleLayerProvider
 import xyz.jpenilla.squaremap.api.SquaremapProvider
 import xyz.jpenilla.squaremap.api.WorldIdentifier
-import java.net.URI
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
-import javax.imageio.ImageIO
 
 object API {
     val markerIconKey: Key = Key.of("squaremarker_marker_icon_")
@@ -34,6 +32,8 @@ object API {
     }
 
     fun initWorld(mapWorld: MapWorld) {
+        registerIcons()
+
         if (mapWorld.identifier() in providerMap) {
             return
         }
@@ -61,23 +61,36 @@ object API {
         providerMap[mapWorld.identifier()] = Pair(scheduled, task)
     }
 
-    private fun registerIcons() {
-        SquaremapProvider
-            .get()
-            .iconRegistry()
-            .register(markerIconKey, ImageIO.read(URI.create(SquareMarker.instance.config.iconUrl).toURL()))
+    fun registerIcons(onlyIfMissing: Boolean = false) {
+        val iconRegistry = SquaremapProvider.get().iconRegistry()
+
+        // Register the default icon.
+        if (!onlyIfMissing || !iconRegistry.hasEntry(markerIconKey)) {
+            try {
+                iconRegistry.register(
+                    markerIconKey,
+                    ImageLoader.load(SquareMarker.instance.config.iconUrl),
+                )
+            } catch (ex: Exception) {
+                SquareMarker.logger.warn(
+                    "${Lang.PLAIN_PREFIX} Could not load the default icon from \"${SquareMarker.instance.config.iconUrl}\".",
+                    ex,
+                )
+            }
+        }
+
         for (marker in MarkerService.getMarkerList()) {
             if (marker.iconUrl.isNotBlank()) {
-                try {
-                    SquaremapProvider
-                        .get()
-                        .iconRegistry()
-                        .register(Key.of("squaremarker_marker_icon_${marker.id}"), ImageIO.read(URI.create(marker.iconUrl).toURL()))
-                } catch (ex: Exception) {
-                    SquareMarker.logger.warn(
-                        "${Lang.PLAIN_PREFIX} There is an invalid url in your marker.json. Please fix \"${marker.iconUrl}\"!",
-                        ex,
-                    )
+                val key = Key.of("squaremarker_marker_icon_${marker.id}")
+                if (!onlyIfMissing || !iconRegistry.hasEntry(key)) {
+                    try {
+                        iconRegistry.register(key, ImageLoader.load(marker.iconUrl))
+                    } catch (ex: Exception) {
+                        SquareMarker.logger.warn(
+                            "${Lang.PLAIN_PREFIX} There is an invalid url in your marker.json. Please fix \"${marker.iconUrl}\"!",
+                            ex,
+                        )
+                    }
                 }
             }
         }

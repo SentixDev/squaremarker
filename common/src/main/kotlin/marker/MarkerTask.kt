@@ -22,6 +22,8 @@ class MarkerTask(
             API.cancel(world.identifier())
         }
 
+        API.registerIcons(onlyIfMissing = true)
+
         provider.clearMarkers()
         MarkerService.getMarkerList().forEach { marker ->
             if (marker.world == world.identifier()) {
