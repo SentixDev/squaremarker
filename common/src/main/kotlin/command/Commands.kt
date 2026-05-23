@@ -34,7 +34,7 @@ class Commands(
             RemoveMarkerCommand(squareMarker, this),
             SetMarkerCommand(squareMarker, this),
             ShowMarkerCommand(squareMarker, this),
-            UpdateMarkerCommand(squareMarker, this),
+            UpdateMarkerCommand(squareMarker, this)
         ).forEach(SquaremarkerCommand::register)
     }
 

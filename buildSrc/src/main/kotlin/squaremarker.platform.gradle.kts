@@ -28,12 +28,11 @@ tasks {
     }
 }
 
-afterEvaluate {
-    tasks.processResources {
-        inputs.property("version", project.version)
+tasks.processResources {
+    val versionProvider = provider { version }
+    inputs.property("version", versionProvider)
 
-        filesMatching(platform.modInfoFilePath.get()) {
-            expand("version" to project.version)
-        }
+    filesMatching(platform.modInfoFilePath.get()) {
+        expand("version" to versionProvider)
     }
 }

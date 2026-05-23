@@ -13,7 +13,7 @@ import java.nio.file.Path
 class SquareMarker(
     commandManager: CommandManager<Commander>,
     private val configFile: Path,
-    dataDir: Path,
+    val dataDir: Path,
     val worldIdentifierSerializer: Any = WorldIdentifierSerializer,
 ) {
     companion object {

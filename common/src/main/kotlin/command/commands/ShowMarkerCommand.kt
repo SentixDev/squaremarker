@@ -64,14 +64,19 @@ class ShowMarkerCommand(
             )
         }
         if (marker.iconUrl.isNotBlank()) {
+            val isUrl = marker.iconUrl.startsWith("http://") || marker.iconUrl.startsWith("https://")
             Components.send(
                 sender,
-                " <gray>× <color:#8411FB>URL <dark_gray>| <color:#8411FB>${
-                    Components.url(
-                        "<color:#8411FB><u>${marker.iconUrl}",
-                        "<color:#8411FB>SHOW",
-                        marker.iconUrl,
-                    )
+                " <gray>× <color:#8411FB>ICON <dark_gray>| <color:#8411FB>${
+                    if (isUrl) {
+                        Components.url(
+                            "<color:#8411FB><u>${marker.iconUrl}",
+                            "<color:#8411FB>SHOW",
+                            marker.iconUrl,
+                        )
+                    } else {
+                        marker.iconUrl
+                    }
                 }",
             )
         }

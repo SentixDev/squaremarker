@@ -12,9 +12,9 @@ dependencies {
 
     compileOnly("io.papermc.paper:paper-api:$minecraftVersion-R0.1-SNAPSHOT")
 
-    implementation("org.incendo", "cloud-paper")
+    implementation("org.incendo:cloud-paper")
 
-    implementation("org.bstats", "bstats-bukkit", bstatsVersion)
+    implementation("org.bstats:bstats-bukkit:$bstatsVersion")
 }
 
 java {

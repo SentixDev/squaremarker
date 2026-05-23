@@ -9,6 +9,8 @@ import dev.sentix.squaremarker.marker.MarkerService
 import org.incendo.cloud.context.CommandContext
 import org.incendo.cloud.minecraft.extras.RichDescription.richDescription
 import org.incendo.cloud.parser.standard.IntegerParser.integerParser
+import xyz.jpenilla.squaremap.api.Key
+import xyz.jpenilla.squaremap.api.SquaremapProvider
 
 class RemoveMarkerCommand(
     plugin: SquareMarker,
@@ -33,11 +35,22 @@ class RemoveMarkerCommand(
 
         val id: Int = context.get("id")
 
-        if (MarkerService.markerExist(id)) {
-            MarkerService.removeMarker(id)
-            Components.sendPrefixed(sender, "<gray>Removed marker with ID <color:#8411FB>$id<gray>.</gray>")
-        } else {
+        if (!MarkerService.markerExist(id)) {
             Components.sendPrefixed(sender, "<gray>No marker with ID <color:#8411FB>$id <gray>found.</gray>")
+            return
         }
+
+        val marker = MarkerService.getMarker(id)
+
+        if (marker.iconUrl.isNotBlank()) {
+            try {
+                SquaremapProvider.get().iconRegistry().unregister(Key.of(marker.iconKey))
+            } catch (_: Exception) {
+                // Icon may not have been registered (e.g. image failed to load), safe to ignore.
+            }
+        }
+
+        MarkerService.removeMarker(id)
+        Components.sendPrefixed(sender, "<gray>Removed marker with ID <color:#8411FB>$id<gray>.</gray>")
     }
 }
