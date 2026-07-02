@@ -7,7 +7,7 @@ neoForge {
     version = libs.versions.neoforge.get()
 }
 
-val projectImpl: Configuration by configurations.creating
+val projectImpl = configurations.create("projectImpl")
 configurations.implementation {
     extendsFrom(projectImpl)
 }

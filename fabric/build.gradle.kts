@@ -3,7 +3,7 @@ plugins {
     id("quiet-fabric-loom")
 }
 
-val projectImpl: Configuration by configurations.creating
+val projectImpl = configurations.create("projectImpl")
 configurations.implementation {
     extendsFrom(projectImpl)
 }
