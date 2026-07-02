@@ -3,14 +3,8 @@ plugins {
     id("net.neoforged.moddev")
 }
 
-val adventureVersion: String by rootProject
-val forgeVersion: String by rootProject
-val cloudMinecraftModdedVersion: String by rootProject
-val adventureFabricVersion: String by rootProject
-val minecraftVersion: String by rootProject
-
 neoForge {
-    version = forgeVersion
+    version = libs.versions.neoforge.get()
 }
 
 val projectImpl: Configuration by configurations.creating
@@ -26,16 +20,16 @@ tasks {
                 it.moduleGroup == "org.incendo"
             }
         }
-        archiveFileName.set("${project.name}-mc$minecraftVersion-${project.version}.jar")
+        archiveFileName.set("${project.name}-mc${libs.versions.minecraft.get()}-${project.version}.jar")
     }
 }
 
 dependencies {
     projectImpl(project(":squaremarker-common"))
     // We don't include() these since squaremap already does and we depend on it
-    implementation("org.incendo:cloud-neoforge:$cloudMinecraftModdedVersion")
-    compileOnly("net.kyori:adventure-api:$adventureVersion")
-    implementation("net.kyori:adventure-platform-neoforge:$adventureFabricVersion")
+    implementation(libs.cloudNeoForge)
+    compileOnly(libs.adventureApi)
+    implementation(libs.adventurePlatformNeoforge)
 }
 
 squareMarker {

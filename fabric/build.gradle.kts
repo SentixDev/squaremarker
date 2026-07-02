@@ -1,21 +1,42 @@
 plugins {
-    id("squaremarker.platform.loom")
+    id("squaremarker.platform")
+    id("quiet-fabric-loom")
 }
 
-val fabricApiVersion: String by rootProject
-val fabricLoaderVersion: String by rootProject
-val cloudMinecraftModdedVersion: String by rootProject
-val adventureFabricVersion: String by rootProject
+val projectImpl: Configuration by configurations.creating
+configurations.implementation {
+    extendsFrom(projectImpl)
+}
 
 dependencies {
-    modImplementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricApiVersion")
+    minecraft(libs.minecraft)
+    mappings(loom.officialMojangMappings())
+    projectImpl(project(":squaremarker-common"))
+
+    modImplementation(libs.fabricLoader)
+    modImplementation(libs.fabricApi)
 
     // We don't include() these since squaremap already does and we depend on it
-    modImplementation("org.incendo:cloud-fabric:$cloudMinecraftModdedVersion")
-    modImplementation("net.kyori:adventure-platform-fabric:$adventureFabricVersion")
+    modImplementation(libs.cloudFabric)
+    modImplementation(libs.adventurePlatformFabric)
+}
+
+tasks {
+    shadowJar {
+        configurations = listOf(projectImpl)
+        dependencies {
+            exclude {
+                it.moduleGroup == "org.incendo"
+            }
+        }
+    }
+    remapJar {
+        inputFile.set(shadowJar.flatMap { it.archiveFile })
+        archiveFileName.set("${project.name}-mc${libs.versions.minecraft.get()}-${project.version}.jar")
+    }
 }
 
 squareMarker {
     modInfoFilePath = "fabric.mod.json"
+    productionJar = tasks.remapJar.flatMap { it.archiveFile }
 }

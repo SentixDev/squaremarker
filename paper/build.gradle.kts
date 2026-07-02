@@ -4,17 +4,14 @@ plugins {
     id("squaremarker.platform")
 }
 
-val minecraftVersion: String by rootProject
-val bstatsVersion: String by rootProject
-
 dependencies {
     implementation(project(":squaremarker-common"))
 
-    compileOnly("io.papermc.paper:paper-api:$minecraftVersion-R0.1-SNAPSHOT")
+    compileOnly(libs.paperApi)
 
-    implementation("org.incendo", "cloud-paper")
+    implementation(libs.cloudPaper)
 
-    implementation("org.bstats", "bstats-bukkit", bstatsVersion)
+    implementation(libs.bStatsBukkit)
 }
 
 java {
