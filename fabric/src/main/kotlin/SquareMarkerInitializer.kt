@@ -6,8 +6,8 @@ import dev.sentix.squaremarker.fabric.command.FabricCommander
 import dev.sentix.squaremarker.marker.API
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.Event
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLevelEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.ModContainer
 import net.minecraft.resources.Identifier
@@ -37,20 +37,20 @@ class SquareMarkerInitializer : ModInitializer {
 
         // Use custom late phase as workaround for squaremap <1.1.7
         val late = Identifier.parse("squaremarker:late")
-        ServerWorldEvents.LOAD.register(late) { _, world ->
+        ServerLevelEvents.LOAD.register(late) { _, level ->
             SquaremapProvider
                 .get()
                 .getWorldIfEnabled(
-                    WorldIdentifier.parse(world.dimension().identifier().toString()),
+                    WorldIdentifier.parse(level.dimension().identifier().toString()),
                 ).ifPresent(API::initWorld)
         }
-        ServerWorldEvents.LOAD.addPhaseOrdering(Event.DEFAULT_PHASE, late)
+        ServerLevelEvents.LOAD.addPhaseOrdering(Event.DEFAULT_PHASE, late)
 
-        ServerWorldEvents.UNLOAD.register { _, world ->
+        ServerLevelEvents.UNLOAD.register { _, level ->
             SquaremapProvider
                 .get()
                 .getWorldIfEnabled(
-                    WorldIdentifier.parse(world.dimension().identifier().toString()),
+                    WorldIdentifier.parse(level.dimension().identifier().toString()),
                 ).ifPresent(API::unloadWorld)
         }
     }

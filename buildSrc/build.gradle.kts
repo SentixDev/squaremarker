@@ -8,12 +8,10 @@ repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://maven.fabricmc.net/")
-    maven("https://maven.architectury.dev/")
     maven("https://repo.jpenilla.xyz/snapshots/")
 }
 
 dependencies {
     implementation(libs.kotlinGradlePlugin)
     implementation(libs.ktlintGradle)
-    implementation(libs.shadow)
 }

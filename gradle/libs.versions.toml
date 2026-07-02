@@ -1,21 +1,22 @@
 [plugins]
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradle" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 
 [versions]
-minecraft = "1.21.11"
+minecraft = "26.1.2"
 cloud = "2.0.0"
 cloudMinecraft = "2.0.0-beta.17"
-cloudModded = "2.0.0-beta.15"
+cloudModded = "2.0.0-beta.16"
 bStats = "3.2.1"
 paperApi = "1.21.11-R0.1-SNAPSHOT"
 squaremap = "1.3.12"
 adventure = "4.26.1"
-adventurePlatformMod = "6.8.0"
+adventurePlatformMod = "6.9.0"
 gson = "2.10.1"
 configurate = "4.2.0"
-fabricApi = "0.141.2+1.21.11"
-fabricLoader = "0.18.4"
-neoforge = "21.11.37-beta"
+fabricApi = "0.154.0+26.1.2"
+fabricLoader = "0.19.3"
+neoforge = "26.1.2.76"
 
 # buildSrc
 kotlin = "2.3.21"
@@ -37,6 +38,9 @@ cloudNeoForge = { group = "org.incendo", name = "cloud-neoforge", version.ref = 
 cloudPaper = { group = "org.incendo", name = "cloud-paper" }
 
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+kotlinStdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+geantyref = { group = "io.leangen.geantyref", name = "geantyref", version = "1.3.16" }
+kyoriOption = { group = "net.kyori", name = "option", version = "1.1.0" }
 
 adventureTextMinimessage = { group = "net.kyori", name = "adventure-text-minimessage", version.ref = "adventure" }
 adventureTextLoggerSlf4j = { group = "net.kyori", name = "adventure-text-logger-slf4j", version.ref = "adventure" }
@@ -45,7 +49,8 @@ adventurePlatformFabric = { group = "net.kyori", name = "adventure-platform-fabr
 adventurePlatformNeoforge = { group = "net.kyori", name = "adventure-platform-neoforge", version.ref = "adventurePlatformMod" }
 
 configurateBom = { group = "org.spongepowered", name = "configurate-bom", version.ref = "configurate" }
-configurateYaml = { group = "org.spongepowered", name = "configurate-yaml" }
+configurateCore = { group = "org.spongepowered", name = "configurate-core", version.ref = "configurate" }
+configurateYaml = { group = "org.spongepowered", name = "configurate-yaml", version.ref = "configurate" }
 
 fabricLoader = { group = "net.fabricmc", name = "fabric-loader", version.ref = "fabricLoader" }
 fabricApi = { group = "net.fabricmc.fabric-api", name = "fabric-api", version.ref = "fabricApi" }
@@ -56,4 +61,6 @@ bStatsBukkit = { group = "org.bstats", name = "bstats-bukkit", version.ref = "bS
 # buildSrc
 kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 ktlintGradle = { group = "org.jlleitschuh.gradle", name = "ktlint-gradle", version.ref = "ktlintGradle" }
-shadow = { group = "com.gradleup.shadow", name = "shadow-gradle-plugin", version.ref = "shadow" }
+
+[bundles]
+moddedRuntime = ["kotlinStdlib", "configurateCore", "configurateYaml", "geantyref", "kyoriOption"]

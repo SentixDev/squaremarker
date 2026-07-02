@@ -1,42 +1,50 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("squaremarker.platform")
-    id("quiet-fabric-loom")
+    id("xyz.jpenilla.quiet-fabric-loom")
 }
 
-val projectImpl = configurations.create("projectImpl")
-configurations.implementation {
-    extendsFrom(projectImpl)
+val common = configurations.create("common")
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_25
+    }
 }
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.officialMojangMappings())
-    projectImpl(project(":squaremarker-common"))
+    implementation(project(":squaremarker-common"))
+    common(project(":squaremarker-common")) {
+        isTransitive = false
+    }
 
-    modImplementation(libs.fabricLoader)
-    modImplementation(libs.fabricApi)
+    implementation(libs.fabricLoader)
+    implementation(libs.fabricApi)
 
     // We don't include() these since squaremap already does and we depend on it
-    modImplementation(libs.cloudFabric)
-    modImplementation(libs.adventurePlatformFabric)
+    implementation(libs.cloudFabric)
+    implementation(libs.adventurePlatformFabric)
+
+    implementation(libs.bundles.moddedRuntime)
+    include(libs.bundles.moddedRuntime)
 }
 
 tasks {
-    shadowJar {
-        configurations = listOf(projectImpl)
-        dependencies {
-            exclude {
-                it.moduleGroup == "org.incendo"
-            }
-        }
-    }
-    remapJar {
-        inputFile.set(shadowJar.flatMap { it.archiveFile })
+    jar {
         archiveFileName.set("${project.name}-mc${libs.versions.minecraft.get()}-${project.version}.jar")
+        from(common.elements.map { files -> files.map { zipTree(it) } }) {
+            exclude("META-INF/MANIFEST.MF")
+        }
     }
 }
 
 squareMarker {
     modInfoFilePath = "fabric.mod.json"
-    productionJar = tasks.remapJar.flatMap { it.archiveFile }
+    productionJar = tasks.jar.flatMap { it.archiveFile }
 }
