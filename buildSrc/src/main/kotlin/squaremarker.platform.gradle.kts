@@ -20,10 +20,11 @@ tasks {
 
 afterEvaluate {
     tasks.processResources {
-        inputs.property("version", project.version)
+        val version = project.version
+        inputs.property("version", version)
 
         filesMatching(platform.modInfoFilePath.get()) {
-            expand("version" to project.version)
+            expand("version" to version)
         }
     }
 }
